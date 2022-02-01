@@ -22,6 +22,7 @@ const showDataApi = (response) => {
 router.get("/pokemons", async (req, res) => {
   //name, img, tipos
   try {
+    //Llamada a la API
     const dataApi = await Promise.all([
       axios.get("https://pokeapi.co/api/v2/pokemon"),
       axios.get("https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20"),
@@ -42,7 +43,14 @@ router.get("/pokemons", async (req, res) => {
         .catch((e) => console.log(e));
     });
     const pokemonsApi = await Promise.all(pokemonsDataApiPromises);
-    res.json(pokemonsApi);
+
+    //Llamada a DB
+    const dataDB = await Pokemon.findAll();
+    
+    totalPokemons = pokemonsApi.concat(dataDB);
+    
+    res.json(totalPokemons);
+
   } catch (error) {
     console.log(error);
   }
