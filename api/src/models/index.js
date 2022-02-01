@@ -8,7 +8,7 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      unique: true,
+      // unique: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
         is: /^[A-Za-z]+$/,
       },
     },
-    life: {
+    hp: {
       type: DataTypes.INTEGER,
     },
     strength: {

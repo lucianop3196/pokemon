@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const axios = require("axios");
-//const { Model } = require("sequelize/dist");
+const { Pokemon, Type } = require("../db");
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -27,7 +27,6 @@ router.get("/pokemons", async (req, res) => {
       axios.get("https://pokeapi.co/api/v2/pokemon/?offset=20&limit=20"),
     ]);
     // console.log(datApi) ---> [{ data: {results:[] } }, { data:{results:[] } }]
-
     dataArr1 = dataApi[0].data.results;
     dataArr2 = dataApi[1].data.results;
 
@@ -49,22 +48,37 @@ router.get("/pokemons", async (req, res) => {
   }
 });
 
+
+//{type, urlimg, id, height, weitght, stats:[hp, attack...]}
 router.get("/pokemon/:idPokemon", async (req, res) => {
   const { idPokemon } = req.params;
+
   try {
     const response = await axios.get(
       `https://pokeapi.co/api/v2/pokemon/${idPokemon}`
     );
+    // console.log("responseeeee", response);
     if (response) {
       const { types, urlImg, id, height, weight } = showDataApi(response);
-      const stats = response.data.stats.map((stat) => {
-        return {};
-      });
 
-      res.json("ok");
+      //reduce ---> {hp: hp, strenght: strenght, ...}
+      const stats = response.data.stats.reduce(
+        (prevValue, actualValue) => ({
+          ...prevValue,
+          [actualValue.stat.name]: actualValue.base_stat,
+        }),
+        {}
+      );
+      const pokemonApi = { id, types, urlImg, height, weight, stats };
+      return res.json(pokemonApi);
     }
-  } catch (e) {
-    console.log(e);
+  } catch {
+    //Si no lo encuentra en la Api lo busca en la db
+    const pokemonDB = Pokemon.findByPk(idPokemon)
+      .then((value) => res.json(pokemonDB))
+      .catch(() =>
+        res.status(404).json("Error --> No se encontro ningun pokemon")
+      );
   }
 });
 
