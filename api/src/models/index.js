@@ -8,16 +8,15 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
-      // unique: true,
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      // unique: true, ???
-      validate: {
-        //Solo letras, empezando con mayscula
-        is: /^[A-Za-z]+$/,
-      },
+      // validate: {
+      //   //Solo letras, empezando con mayscula
+      //   is: /^[A-Za-z]+$/,
+      // },
     },
     hp: {
       type: DataTypes.INTEGER,
