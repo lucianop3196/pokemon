@@ -94,21 +94,19 @@ router.get("/pokemon/:idPokemon", async (req, res) => {
   const { idPokemon } = req.params;
 
   try {
-    if (idPokemon < 1000000) {
-      //Consultar como puedo hacer este condicional
+    const pokemonDB = await Pokemon.findByPk(idPokemon, { include: Type });
+    return res.json(pokemonDB);
+  } catch {
+    try {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${idPokemon}`
       );
       const { name, types, urlImg, id, height, weight, stats } =
         showDataApi(response);
       return res.json({ name, types, urlImg, id, height, weight, ...stats });
+    } catch (error) {
+      res.status(404).json("Error, no encuentra el id: " + error);
     }
-
-    const pokemonDB = await Pokemon.findByPk(idPokemon, { include: Type });
-    console.log(pokemonDB);
-    return res.json(pokemonDB);
-  } catch (e) {
-    res.status(404).json("Error, no encuentra el id: " + e);
   }
 });
 
