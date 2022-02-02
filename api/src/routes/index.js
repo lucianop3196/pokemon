@@ -12,7 +12,9 @@ const router = Router();
 const showDataApi = (response) => {
   return {
     name: response.data.name,
-    types: response.data.types?.map((elem) => elem.type.name),
+    types: response.data.types?.map((elem) => {
+      return { name: elem.type.name };
+    }),
     urlImg: response.data.sprites.other["official-artwork"].front_default,
     id: response.data.id,
     height: response.data.height,
@@ -28,20 +30,33 @@ const showDataApi = (response) => {
 };
 
 router.get("/pokemons", async (req, res) => {
-  //name, img, tipos
   const { name } = req.query;
   try {
+    /////////////Llamada a API por name/////////////////
     if (name) {
-      const dataApiResponse = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${name}`
-      );
-      const dataDbByName = await Pokemon.findOne({ where: { name } });
-      // if(dataDbByName) return res.json(dataDbByName);
-      const dataApiByName = showDataApi(dataApiResponse);
-      if (dataDbByName) return res.json(dataDbByName);
-      if (dataApiByName) return res.json(dataApiByName);
+      const dataDbByName = await Pokemon.findOne({
+        where: { name },
+        include: Type,
+      });
+      if (dataDbByName !== null) return res.json(dataDbByName);
+      else {
+        ////////////////Consulta a DB por name/////////////////
+        const dataApiResponse = await axios.get(
+          `https://pokeapi.co/api/v2/pokemon/${name}`
+        );
+        const dataApiByName = showDataApi(dataApiResponse);
+        const { types, urlImg, id, height, weight, stats } = dataApiByName;
+        return res.json({
+          name: dataApiByName.name,
+          types,
+          urlImg,
+          id,
+          height,
+          weight,
+          ...stats,
+        });
+      }
     }
-
     ////////7///////Llamada a la API/////////////////////7
     const dataApi = await Promise.all([
       axios.get("https://pokeapi.co/api/v2/pokemon"),
@@ -68,8 +83,7 @@ router.get("/pokemons", async (req, res) => {
     const dataDB = await Pokemon.findAll();
 
     totalPokemons = pokemonsApi.concat(dataDB);
-
-    res.json(totalPokemons);
+    return res.json(totalPokemons);
   } catch (error) {
     res.status(404).json("No se encontraron el/los pokemons. " + error);
   }
@@ -80,24 +94,36 @@ router.get("/pokemon/:idPokemon", async (req, res) => {
   const { idPokemon } = req.params;
 
   try {
-    const response = await axios.get(
-      `https://pokeapi.co/api/v2/pokemon/${idPokemon}`
-    );
-    if (response) {
+    if (idPokemon < 1000000) {
+      //Consultar como puedo hacer este condicional
+      const response = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${idPokemon}`
+      );
       const { name, types, urlImg, id, height, weight, stats } =
         showDataApi(response);
-
-      //reduce ---> {hp: hp, strenght: strenght, ...}
-      const pokemonApi = { id, name, types, urlImg, height, weight, stats };
-      return res.json(pokemonApi);
+      return res.json({ name, types, urlImg, id, height, weight, ...stats });
     }
-  } catch {
-    //Si no lo encuentra en la Api lo busca en la db
-    const pokemonDB = Pokemon.findByPk(idPokemon)
-      .then((value) => res.json(pokemonDB))
-      .catch(() =>
-        res.status(404).json("Error --> No se encontro ningún pokemon")
-      );
+
+    const pokemonDB = await Pokemon.findByPk(idPokemon, { include: Type });
+    console.log(pokemonDB);
+    return res.json(pokemonDB);
+  } catch (e) {
+    res.status(404).json("Error, no encuentra el id: " + e);
+  }
+});
+
+router.post("/pokemons", async (req, res) => {
+  try {
+    const dataFormObj = req.body;
+    delete dataFormObj.urlImg;
+    const pokemonCreated = await Pokemon.findOrCreate({
+      where: { name: dataFormObj.name },
+      defaults: dataFormObj,
+      include: Type,
+    });
+    res.json(pokemonCreated);
+  } catch (e) {
+    res.status(404).json("Error ---> " + e);
   }
 });
 
