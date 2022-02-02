@@ -95,6 +95,8 @@ router.get("/pokemon/:idPokemon", async (req, res) => {
 
   try {
     const pokemonDB = await Pokemon.findByPk(idPokemon, { include: Type });
+    if (pokemonDB === null)
+      return res.status(404).json("Error, no encuentra el id: " + error);
     return res.json(pokemonDB);
   } catch {
     try {

@@ -42,10 +42,7 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        //Solo letras, empezando con mayscula
-        is: /^[A-Za-z]+$/,
-      },
+      // unique: true,
     },
   });
 };
