@@ -13,7 +13,7 @@ const showDataApi = (response) => {
   return {
     name: response.data.name,
     types: response.data.types?.map((elem) => {
-      return { name: elem.type.name };
+      return elem.type.name;
     }),
     urlImg: response.data.sprites.other["official-artwork"].front_default,
     id: response.data.id,
@@ -114,17 +114,69 @@ router.get("/pokemon/:idPokemon", async (req, res) => {
 
 router.post("/pokemons", async (req, res) => {
   try {
-    const dataFormObj = req.body;
-    delete dataFormObj.urlImg;
-    const pokemonCreated = await Pokemon.findOrCreate({
-      where: { name: dataFormObj.name },
-      defaults: dataFormObj,
+    const { name, types, urlImg, height, weight, hp, attack, defense, speed } =
+      req.body;
+    const pokemonCreated = await Pokemon.create({
+      name,
+      urlImg,
+      height,
+      weight,
+      hp,
+      attack,
+      defense,
+      speed,
+    });
+
+    const typeDbArr = await Type.findAll({
+      where: { name: types },
+    });
+    const typeDbId = typeDbArr?.map((p) => p.dataValues.id);
+
+    await pokemonCreated.addType(typeDbId);
+
+    const newPokemon = await Pokemon.findOne({
+      where: { name },
       include: Type,
     });
-    res.json(pokemonCreated);
+
+    return res.json(newPokemon);
   } catch (e) {
-    res.status(404).json("Error ---> " + e);
+    return res.status(404).json("Error ---> " + e);
   }
 });
+
+// router.post("/pokemons", async (req, res) => {
+//   try {
+//     const { name, types, urlImg, height, weight, hp, attack, defense, speed } =
+//       req.body;
+//     const pokemonCreate = await Pokemon.create({
+//       name,
+//       urlImg,
+//       height,
+//       weight,
+//       hp,
+//       attack,
+//       defense,
+//       speed,
+//     });
+
+//     const typeDbArr = await Type.findAll({
+//       where: {name: types}
+//     })
+//     const typeDb = typeDbArr.map(p => p.dataValues.name )
+//     console.log(typeDb);
+
+//     if (typeof types === "Number") {
+//       await pokemonCreate.addType(types, { through: "pokemon_type" });
+//     } else {
+//       await pokemonCreate.addType(types[0], { through: "pokemon_type" });
+//       await pokemonCreate.addType(types[1], { through: "pokemon_type" });
+//     }
+//     const pokemon = await Pokemon.findOne({ where: { name }, include: Type });
+//     return res.json(pokemon);
+//   } catch (e) {
+//     return res.json(e);
+//   }
+// });
 
 module.exports = router;
