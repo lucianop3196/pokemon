@@ -124,8 +124,8 @@ router.post("/pokemons", async (req, res) => {
       where: { name },
       include: Type,
     });
-
-    return res.json(newPokemon);
+    const newPokemonNormalized = normalizeDataDb(newPokemon);
+    return res.json(newPokemonNormalized);
   } catch (e) {
     return res.status(404).json("Error ---> " + e);
   }
