@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const axios = require("axios");
 const { Pokemon, Type } = require("../db");
+const { normalizeDataApi, normalizeDataDb } = require("./utils");
 
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
@@ -9,52 +10,26 @@ const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-const showDataApi = (response) => {
-  return {
-    name: response.data.name,
-    types: response.data.types?.map((elem) => {
-      return elem.type.name;
-    }),
-    urlImg: response.data.sprites.other["official-artwork"].front_default,
-    id: response.data.id,
-    height: response.data.height,
-    weight: response.data.weight,
-    stats: response.data.stats.reduce(
-      (prevValue, actualValue) => ({
-        ...prevValue,
-        [actualValue.stat.name]: actualValue.base_stat,
-      }),
-      {}
-    ),
-  };
-};
 
 router.get("/pokemons", async (req, res) => {
   const { name } = req.query;
   try {
-    /////////////Llamada a API por name/////////////////
+    /////////////Llamada a DB por name/////////////////
     if (name) {
-      const dataDbByName = await Pokemon.findOne({
+      const pokemonDbByName = await Pokemon.findOne({
         where: { name },
         include: Type,
       });
-      if (dataDbByName !== null) return res.json(dataDbByName);
+      if (pokemonDbByName !== null)
+        return res.json(normalizeDataDb(pokemonDbByName));
       else {
-        ////////////////Consulta a DB por name/////////////////
+        ////////////////Consulta a la API por name/////////////////
         const dataApiResponse = await axios.get(
           `https://pokeapi.co/api/v2/pokemon/${name}`
         );
-        const dataApiByName = showDataApi(dataApiResponse);
-        const { types, urlImg, id, height, weight, stats } = dataApiByName;
-        return res.json({
-          name: dataApiByName.name,
-          types,
-          urlImg,
-          id,
-          height,
-          weight,
-          ...stats,
-        });
+        const dataApiByName = normalizeDataApi(dataApiResponse);
+
+        return res.json(dataApiByName);
       }
     }
     ////////7///////Llamada a la API/////////////////////7
@@ -71,7 +46,7 @@ router.get("/pokemons", async (req, res) => {
       return axios
         .get(pokemon.url)
         .then((response) => {
-          const { name, types, urlImg } = showDataApi(response);
+          const { name, types, urlImg } = normalizeDataApi(response);
           return { name, types, urlImg };
         })
         .catch((e) => console.log(e));
@@ -80,9 +55,21 @@ router.get("/pokemons", async (req, res) => {
     const pokemonsApi = await Promise.all(pokemonsDataApiPromises);
 
     ////////7///////Consulta a la base de datos/////////////////////7
-    const dataDB = await Pokemon.findAll();
+    const dataDB = await Pokemon.findAll({
+      include: {
+        model: Type,
+        attributes: ["name"],
+        through: { attributes: [] },
+      },
+      attributes: ["name", "urlImg"],
+    });
+    //Normalizamos la info para que llegue igual que la API
+    const dataDBNormalized = dataDB?.map((pokemon) => {
+      return normalizeDataDb(pokemon);
+    });
 
-    totalPokemons = pokemonsApi.concat(dataDB);
+    //Concatenamos los pokemones de DB y API
+    const totalPokemons = pokemonsApi.concat(dataDBNormalized);
     return res.json(totalPokemons);
   } catch (error) {
     res.status(404).json("No se encontraron el/los pokemons. " + error);
@@ -97,15 +84,14 @@ router.get("/pokemon/:idPokemon", async (req, res) => {
     const pokemonDB = await Pokemon.findByPk(idPokemon, { include: Type });
     if (pokemonDB === null)
       return res.status(404).json("Error, no encuentra el id: " + error);
-    return res.json(pokemonDB);
+    return res.json(normalizeDataDb(pokemonDB));
   } catch {
     try {
       const response = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${idPokemon}`
       );
-      const { name, types, urlImg, id, height, weight, stats } =
-        showDataApi(response);
-      return res.json({ name, types, urlImg, id, height, weight, ...stats });
+      const dataApiResponse = normalizeDataApi(response);
+      return res.json(dataApiResponse);
     } catch (error) {
       res.status(404).json("Error, no encuentra el id: " + error);
     }
@@ -144,39 +130,5 @@ router.post("/pokemons", async (req, res) => {
     return res.status(404).json("Error ---> " + e);
   }
 });
-
-// router.post("/pokemons", async (req, res) => {
-//   try {
-//     const { name, types, urlImg, height, weight, hp, attack, defense, speed } =
-//       req.body;
-//     const pokemonCreate = await Pokemon.create({
-//       name,
-//       urlImg,
-//       height,
-//       weight,
-//       hp,
-//       attack,
-//       defense,
-//       speed,
-//     });
-
-//     const typeDbArr = await Type.findAll({
-//       where: {name: types}
-//     })
-//     const typeDb = typeDbArr.map(p => p.dataValues.name )
-//     console.log(typeDb);
-
-//     if (typeof types === "Number") {
-//       await pokemonCreate.addType(types, { through: "pokemon_type" });
-//     } else {
-//       await pokemonCreate.addType(types[0], { through: "pokemon_type" });
-//       await pokemonCreate.addType(types[1], { through: "pokemon_type" });
-//     }
-//     const pokemon = await Pokemon.findOne({ where: { name }, include: Type });
-//     return res.json(pokemon);
-//   } catch (e) {
-//     return res.json(e);
-//   }
-// });
 
 module.exports = router;
