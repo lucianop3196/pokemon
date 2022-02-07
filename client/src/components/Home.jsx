@@ -1,8 +1,9 @@
+import NavHome from "./NavHome";
 
 function Home() {
     return (
       <div>
-        Soy home
+        <NavHome/>
       </div>
     );
   }
