@@ -46,8 +46,8 @@ router.get("/pokemons", async (req, res) => {
       return axios
         .get(pokemon.url)
         .then((response) => {
-          const { name, types, urlImg } = normalizeDataApi(response);
-          return { name, types, urlImg };
+          const { name, types, urlImg, createInDb } = normalizeDataApi(response);
+          return { name, types, urlImg, createInDb };
         })
         .catch((e) => console.log(e));
     });
@@ -61,7 +61,7 @@ router.get("/pokemons", async (req, res) => {
         attributes: ["name"],
         through: { attributes: [] },
       },
-      attributes: ["name", "urlImg"],
+      attributes: ["name", "urlImg", "createInDb"],
     });
     //Normalizamos la info para que llegue igual que la API
     const dataDBNormalized = dataDB?.map((pokemon) => {

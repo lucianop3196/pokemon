@@ -12,34 +12,47 @@ export const actionTypes = {
   SORT_POKEMONS_ALPHABETICALLY: "SORT_POKEMONS_ALPHABETICALLY",
 };
 
+
+export function getTypes() {
+  return function (dispatch) {
+    return axios("http://localhost:3001/types").then((resp) => {
+      return dispatch({ type: actionTypes.GET_TYPES, payload: resp.data });
+    });
+  };
+}
+
 export function getPokemons() {
   return function (dispatch) {
-    return axios.get("/pokemons").then((response) => {
-      return dispatch({ type: actionTypes.GET_POKEMONS, payload: response });
-    });
+    return axios("http://localhost:3001/pokemons")
+      .then((response) => {
+        return dispatch({ type: actionTypes.GET_POKEMONS, payload: response.data });
+      })
+      .catch((e) =>
+        console.log("Ha ocurrido un error. Porfvor, intente nuevamnete " + e)
+      );
   };
 }
 
 export function getPokemonById(id) {
   return function (dispatch) {
-    return axios.get(`/pokemon/${id}`).then((resp) => {
-      return dispatch({ type: actionTypes.GET_POKEMON_BY_ID, payload: resp });
+    return axios(`http://localhost:3001/pokemon/${id}`).then((resp) => {
+      return dispatch({ type: actionTypes.GET_POKEMON_BY_ID, payload: resp.data });
     });
   };
 }
 
 export function searchPokemon(name) {
   return function (dispatch) {
-    return axios.get(`/pokemons?name=${name}`).then((response) => {
-      return dispatch({ type: actionTypes.SEARCH_POKEMON, payload: response });
+    return axios(`http://localhost:3001/pokemons?name=${name}`).then((response) => {
+      return dispatch({ type: actionTypes.SEARCH_POKEMON, payload: response.data });
     });
   };
 }
 
-export function filterPokemonByType(types) {
+export function filterPokemonByType(type) {
   return {
     type: actionTypes.FILTER_POKEMONS_BY_TYPE,
-    payload: types,
+    payload: type,
   };
 }
 
@@ -50,19 +63,13 @@ export function filterPokemonCreated(created) {
   };
 }
 
-export function getTypes() {
-  return function (dispatch) {
-    return axios.get("/types").then((resp) => {
-      return dispatch({ type: actionTypes.GET_TYPES, payload: resp });
-    });
-  };
-}
+
 
 // Documentación para dispachar código asincrono https://redux.js.org/tutorials/fundamentals/part-6-async-logic
 export function saveNewPokemon(pokemon) {
   return function (dispatch) {
     //Chequear de que forma llega pokemon. Como un objeto?
-    return axios.post("/pokemons", pokemon).then((resp) => {
+    return axios.post("http://localhost:3001/pokemons", pokemon).then((resp) => {
       return dispatch({ type: actionTypes.POST_POKEMON, payload: resp });
     });
   };
