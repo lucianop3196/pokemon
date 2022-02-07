@@ -1,8 +1,9 @@
 import { actionTypes } from "../actions";
 
 const initialState = {
-  pokemons: [], // {id, name, type, img_url} de todos los pokemones
+  pokemons: [], // {id, name, type, img_url} de todos los pokemones, se ira modificando con los filtrados y sorts
   pokemon: {}, //pokemon detail {id, name, type, img_url, hp, speed, ...stats, etc}
+  allPokemons: [], //Siempre cuenta con todos los pokemones
   filtered: [], //Pokemones filtrados según corresponda.
   types: [],
 };
@@ -10,41 +11,50 @@ const initialState = {
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.GET_POKEMONS: {
-      return { ...state, pokemons: action.payload, filtered: action.payload };
+      return {
+        ...state,
+        allPokemons: action.payload,
+        pokemons: action.payload,
+      };
     }
+
     case actionTypes.GET_TYPES: {
       return { ...state, types: action.payload };
     }
+
     case actionTypes.GET_POKEMON_BY_ID: {
       return { ...state, pokemon: action.payload };
     }
+
     case actionTypes.SEARCH_POKEMON: {
-      return { ...state, filtered: action.payload };
+      return { ...state, pokemons: action.payload };
     }
+
     case actionTypes.FILTER_POKEMONS_BY_TYPE: {
       const type = action.payload; //types debería llegar como un string "flying"
       if (type === "all") return { ...state };
       else {
         return {
           ...state,
-          filtered: state.pokemons?.filter((pokemon) => {
+          pokemons: state.allPokemons?.filter((pokemon) => {
             return pokemon.types.includes(type);
           }),
         };
       }
     }
+
     case actionTypes.FILTER_POKEMONS_CREATED: {
       if (action.payload === "created") {
         return {
           ...state,
-          filtered: state.pokemons?.filter((pokemon) => {
+          pokemons: state.allPokemons?.filter((pokemon) => {
             return pokemon.createInDb === true;
           }),
         };
       } else if (action.payload === "api") {
         return {
           ...state,
-          filtered: state.pokemons?.filter((pokemon) => {
+          pokemons: state.allPokemons?.filter((pokemon) => {
             return pokemon.createInDb === false;
           }),
         };
@@ -52,6 +62,55 @@ function rootReducer(state = initialState, action) {
         return { ...state };
       }
     }
+
+    case actionTypes.POST_POKEMON: {
+      return {
+        ...state,
+        pokemons: state.pokemons.push(action.payload),
+        allPokemons: state.allPokemons.push(action.payload),
+      };
+    }
+
+    case actionTypes.SORT_POKEMONS_BY_STRENGTH: {
+      if (action.payload === "asc") {
+        return {
+          ...state,
+          pokemons: state.allPokemons?.sort((a, b) => {
+            return a.attack - b.attack;
+          }),
+        };
+      } else {
+        return {
+          ...state,
+          pokemons: state.allPokemons?.sort((a, b) => {
+            return b.attack - a.attack;
+          }),
+        };
+      }
+    }
+
+    case actionTypes.SORT_POKEMONS_ALPHABETICALLY: {
+      if (action.payload === "asc") {
+        return {
+          ...state,
+          pokemons: state.allPokemons?.sort((a, b) => {
+            if (a.name > b.name) return 1;
+            if (a.name < b.name) return -1;
+            return 0;
+          }),
+        };
+      } else {
+        return {
+          ...state,
+          pokemons: state.allPokemons?.sort((a, b) => {
+            if (a.name > b.name) return -1;
+            if (a.name < b.name) return 1;
+            return 0;
+          }),
+        };
+      }
+    }
+
     default:
       return { ...state };
   }
