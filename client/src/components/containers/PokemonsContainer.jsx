@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemons } from "../../actions";
-import Pagination, { objIndex } from "../Pagination";
+import Pagination, { objIndexPagination } from "../Pagination";
 import Pokemon from "../presentationals/Pokemon";
 
 function PokemonsContainer() {
@@ -15,24 +15,21 @@ function PokemonsContainer() {
 
   useEffect(() => {
     dispatch(getPokemons());
-        // dispatch(slicePokemons(firstItemIndex, lastItemIndex));
-
   }, []);
 
   const handlePagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
-  const { lastItemIndex, firstItemIndex } = objIndex(
+  const { lastItemIndex, firstItemIndex } = objIndexPagination(
     currentPage,
     quantityXPage
   );
 
-
   return (
     <div>
       <div>
-        {pokemons.length > 0 ? (
+        {allPokemons ? (
           <Pagination
             items={allPokemons}
             quantityXPage={quantityXPage}
@@ -41,9 +38,15 @@ function PokemonsContainer() {
         ) : null}
       </div>
       <div>
-        {pokemons?.slice(firstItemIndex,lastItemIndex).map((pokemon) => {
-          return <Pokemon key={pokemon.id} props={pokemon} />;
-        })}
+        {Array.isArray(pokemons) === false ? (
+          <>
+            <Pokemon key={pokemons.id} props={pokemons} />
+          </>
+        ) : (
+          pokemons?.slice(firstItemIndex, lastItemIndex).map((pokemon) => {
+            return <Pokemon key={pokemon.id} props={pokemon} />;
+          })
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import NavHome from "../NavHome";
+import NavHome from "./NavHome";
 import PokemonsContainer from "./PokemonsContainer";
 import { useDispatch } from "react-redux";
 import { getTypes } from "../../actions/index";

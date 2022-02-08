@@ -1,6 +1,7 @@
 //Componente que renderiza los botones, y les asocia un evento para modificar el estado local de pokemonContainer
 
-function Pagination({ items, quantityXPage, handlePagination }) {
+function Pagination({ items, quantityXPage, handlePagination }) { 
+  //handlePagination, función que setea la currentPage de mi container
 
   //Bluce for me genera cantidad de botones que necesito
   const pages = Math.ceil(items.length / quantityXPage);
@@ -29,7 +30,7 @@ function Pagination({ items, quantityXPage, handlePagination }) {
 
 export default Pagination;
 
-export const objIndex = (pageNumber, quantityXPage) => {
+export const objIndexPagination = (pageNumber, quantityXPage) => {
   const lastItemIndex = pageNumber * quantityXPage;
     const firstItemIndex = lastItemIndex - quantityXPage;
     return { lastItemIndex, firstItemIndex };
