@@ -1,3 +1,5 @@
+//Componente que renderizara todos los botones de filtrado y busqueda
+
 function Navbar() {
   return (
     <div>
