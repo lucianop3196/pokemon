@@ -1,30 +1,21 @@
-//Componente que renderiza los botones, cuyos eventos ejecutan una función que
-//recibe como parámetro firstItemIndex y lastItemIndex
-
-// import { useState } from "react";
+//Componente que renderiza los botones, y les asocia un evento para modificar el estado local de pokemonContainer
 
 function Pagination({ items, quantityXPage, handlePagination }) {
-  //   const [currentPage, setCurrentPage] = useState(1);
 
+  //Bluce for me genera cantidad de botones que necesito
   const pages = Math.ceil(items.length / quantityXPage);
   let pageNumbers = [];
   for (let i = 1; i <= pages; i++) {
     pageNumbers.push(i);
   }
-  const objIndex = (pageNumber) => {
-    const lastItemIndex = pageNumber * quantityXPage;
-    const firstItemIndex = lastItemIndex - quantityXPage;
-    return { lastItemIndex, firstItemIndex };
-  };
 
   return (
     <>
       {pageNumbers?.map((pageNumber) => {
-        const { firstItemIndex, lastItemIndex } = objIndex(pageNumber);
         return (
           <button
             onClick={() => {
-              return handlePagination(firstItemIndex, lastItemIndex);
+              return handlePagination(pageNumber);
             }}
             key={pageNumber}
           >
@@ -37,3 +28,9 @@ function Pagination({ items, quantityXPage, handlePagination }) {
 }
 
 export default Pagination;
+
+export const objIndex = (pageNumber, quantityXPage) => {
+  const lastItemIndex = pageNumber * quantityXPage;
+    const firstItemIndex = lastItemIndex - quantityXPage;
+    return { lastItemIndex, firstItemIndex };
+}

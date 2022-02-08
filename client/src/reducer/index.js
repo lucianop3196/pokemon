@@ -111,16 +111,6 @@ function rootReducer(state = initialState, action) {
       }
     }
 
-    case actionTypes.SLICE_POKEMONS: {
-      return {
-        ...state,
-        pokemons: state.allPokemons?.slice(
-          action.payload.firstIndex,
-          action.payload.lastIndex
-        ),
-      };
-    }
-
     default:
       return { ...state };
   }

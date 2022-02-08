@@ -101,10 +101,3 @@ export function sortPokemonsAlphabetically(typeOfSort) {
     payload: typeOfSort,
   };
 }
-
-export function slicePokemons(firstIndex, lastIndex) {
-  return {
-    type: actionTypes.SLICE_POKEMONS,
-    payload: { firstIndex, lastIndex },
-  };
-}
