@@ -10,8 +10,8 @@ export const actionTypes = {
   POST_POKEMON: "POST_POKEMON",
   SORT_POKEMONS_BY_STRENGTH: "SORT_POKEMONS_BY_STRENGTH",
   SORT_POKEMONS_ALPHABETICALLY: "SORT_POKEMONS_ALPHABETICALLY",
+  SLICE_POKEMONS: "SLICE_POKEMONS",
 };
-
 
 export function getTypes() {
   return function (dispatch) {
@@ -25,7 +25,10 @@ export function getPokemons() {
   return function (dispatch) {
     return axios("http://localhost:3001/pokemons")
       .then((response) => {
-        return dispatch({ type: actionTypes.GET_POKEMONS, payload: response.data });
+        return dispatch({
+          type: actionTypes.GET_POKEMONS,
+          payload: response.data,
+        });
       })
       .catch((e) =>
         console.log("Ha ocurrido un error. Porfvor, intente nuevamnete " + e)
@@ -36,16 +39,24 @@ export function getPokemons() {
 export function getPokemonById(id) {
   return function (dispatch) {
     return axios(`http://localhost:3001/pokemon/${id}`).then((resp) => {
-      return dispatch({ type: actionTypes.GET_POKEMON_BY_ID, payload: resp.data });
+      return dispatch({
+        type: actionTypes.GET_POKEMON_BY_ID,
+        payload: resp.data,
+      });
     });
   };
 }
 
 export function searchPokemon(name) {
   return function (dispatch) {
-    return axios(`http://localhost:3001/pokemons?name=${name}`).then((response) => {
-      return dispatch({ type: actionTypes.SEARCH_POKEMON, payload: response.data });
-    });
+    return axios(`http://localhost:3001/pokemons?name=${name}`).then(
+      (response) => {
+        return dispatch({
+          type: actionTypes.SEARCH_POKEMON,
+          payload: response.data,
+        });
+      }
+    );
   };
 }
 
@@ -63,15 +74,15 @@ export function filterPokemonCreated(created) {
   };
 }
 
-
-
 // Documentación para dispachar código asincrono https://redux.js.org/tutorials/fundamentals/part-6-async-logic
 export function saveNewPokemon(pokemon) {
   return function (dispatch) {
     //Chequear de que forma llega pokemon. Como un objeto?
-    return axios.post("http://localhost:3001/pokemons", pokemon).then((resp) => {
-      return dispatch({ type: actionTypes.POST_POKEMON, payload: resp });
-    });
+    return axios
+      .post("http://localhost:3001/pokemons", pokemon)
+      .then((resp) => {
+        return dispatch({ type: actionTypes.POST_POKEMON, payload: resp });
+      });
   };
 }
 
@@ -88,5 +99,12 @@ export function sortPokemonsAlphabetically(typeOfSort) {
   return {
     type: actionTypes.SORT_POKEMONS_ALPHABETICALLY,
     payload: typeOfSort,
+  };
+}
+
+export function slicePokemons(firstIndex, lastIndex) {
+  return {
+    type: actionTypes.SLICE_POKEMONS,
+    payload: { firstIndex, lastIndex },
   };
 }
