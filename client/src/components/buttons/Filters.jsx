@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Filters = ({types, defaultDescription, handleFilter}) => {
+const Filters = ({items, defaultDescription, handleFilter}) => {
   
 
   return (
@@ -11,8 +11,8 @@ const Filters = ({types, defaultDescription, handleFilter}) => {
         <option value="default">
           {defaultDescription}
         </option>
-        {types?.map((type)=>{
-            return <option key={type.id} value={type.name}>{type.name}</option>
+        {items?.map((item)=>{
+            return <option key={item.id} value={item.name}>{item.name}</option>
         })}
       </select>
     </div>

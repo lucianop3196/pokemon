@@ -4,6 +4,7 @@ import PokemonsContainer from "./PokemonsContainer";
 import { useDispatch, useSelector } from "react-redux";
 import {
   filterPokemonByType,
+  filterPokemonCreated,
   getPokemons,
   getTypes,
   sortPokemonsAlphabetically,
@@ -16,7 +17,6 @@ function Home() {
   const [order, setOrder] = useState(""); // Hook para manejar el ordenamiento
   const [currentPage, setCurrentPage] = useState(1); // Hook para manejar el paginado
 
-  const allPokemons = useSelector((state) => state.allPokemons);
   const pokemons = useSelector((state) => state.pokemons);
   const dispatch = useDispatch();
   const quantityXPage = 12;
@@ -45,11 +45,11 @@ function Home() {
     setOrder(type);
     setCurrentPage(1);
   };
-  // const handleOriginFilter = (type) => {
-  //   dispatch(filterPokemonByType(type));
-  //   setOrder(type);
-  //   setCurrentPage(1);
-  // };
+  const handleSourceFilter = (isCreated) => {
+    dispatch(filterPokemonCreated(isCreated));
+    setOrder(isCreated);
+    setCurrentPage(1);
+  };
 
   //Paginado
   const handlePagination = (pageNumber) => {
@@ -72,6 +72,7 @@ function Home() {
         handleSortAlph={handleSortAlph}
         handleSortStrength={handleSortStrength}
         handleTypeFilter={handleTypeFilter}
+        handleSourceFilter={handleSourceFilter}
       />
 
       {pokemons ? (

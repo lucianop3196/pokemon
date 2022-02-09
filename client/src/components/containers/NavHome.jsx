@@ -4,9 +4,19 @@ import Sort from "../buttons/Sort";
 import { useSelector } from "react-redux";
 import Filters from "../buttons/Filters";
 
-function NavHome({ handleSortAlph, handleSortStrength, handleTypeFilter }) {
+function NavHome({
+  handleSortAlph,
+  handleSortStrength,
+  handleTypeFilter,
+  handleSourceFilter,
+}) {
   const pokemons = useSelector((state) => state.pokemons);
   const types = useSelector((state) => state.types);
+
+  const sourceOptions = [
+    { name: "api", id: 1 },
+    { name: "created", id: 2 },
+  ];
 
   return (
     <div>
@@ -15,29 +25,29 @@ function NavHome({ handleSortAlph, handleSortStrength, handleTypeFilter }) {
           <SearchButton />
           <Sort
             handleSort={handleSortAlph}
-            sortDescription="Orden alfabético"
+            sortDescription="Sort alphabetically"
           />
         </li>
         <li>
           <Sort
             handleSort={handleSortStrength}
-            sortDescription="Orden por fuerza"
+            sortDescription="Sort by strength"
           />
         </li>
         <li>
           <Filters
-            types={types}
-            defaultDescription="Filtrar por tipo"
+            items={types}
+            defaultDescription="Filter by type"
             handleFilter={handleTypeFilter}
           />
         </li>
-        {/* <li>
+        <li>
           <Filters
-            types={pokemons}
-            defaultDescription="Origen"
-            handleFilter={handleFilter}
+            items={sourceOptions}
+            defaultDescription="Filter by source"
+            handleFilter={handleSourceFilter}
           />
-        </li> */}
+        </li>
       </ul>
     </div>
   );

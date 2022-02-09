@@ -6,6 +6,8 @@ const initialState = {
   allPokemons: [], //Siempre cuenta con todos los pokemones
   filtered: [], //Pokemones filtrados según corresponda.
   types: [],
+  filteredByType: [],
+  filteredBySource: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -16,6 +18,8 @@ function rootReducer(state = initialState, action) {
         allPokemons: action.payload,
         pokemons: action.payload,
         filtered: action.payload,
+        filteredBySource: action.payload,
+        filteredByType: action.payload,
       };
     }
 
@@ -46,7 +50,7 @@ function rootReducer(state = initialState, action) {
         return {
           ...state,
           pokemons: pokemonsFiltered,
-          filtered: pokemonsFiltered
+          filtered: pokemonsFiltered,
         };
       }
     }
@@ -55,19 +59,19 @@ function rootReducer(state = initialState, action) {
       if (action.payload === "created") {
         return {
           ...state,
-          pokemons: state.allPokemons?.filter((pokemon) => {
+          pokemons: state.filtered?.filter((pokemon) => {
             return pokemon.createInDb === true;
           }),
         };
       } else if (action.payload === "api") {
         return {
           ...state,
-          pokemons: state.allPokemons?.filter((pokemon) => {
+          pokemons: state.filtered?.filter((pokemon) => {
             return pokemon.createInDb === false;
           }),
         };
       } else {
-        return { ...state, pokemons: state.allPokemons };
+        return { ...state, pokemons: state.filtered };
       }
     }
 
