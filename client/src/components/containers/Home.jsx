@@ -3,6 +3,7 @@ import NavHome from "./NavHome";
 import PokemonsContainer from "./PokemonsContainer";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  filterPokemonByType,
   getPokemons,
   getTypes,
   sortPokemonsAlphabetically,
@@ -16,8 +17,9 @@ function Home() {
   const [currentPage, setCurrentPage] = useState(1); // Hook para manejar el paginado
 
   const allPokemons = useSelector((state) => state.allPokemons);
-  const quantityXPage = 12;
+  const pokemons = useSelector((state) => state.pokemons);
   const dispatch = useDispatch();
+  const quantityXPage = 12;
 
   //Llamado a la API para obtener types y pokemons
   useEffect(() => {
@@ -26,16 +28,28 @@ function Home() {
   }, []);
 
   //Funciones de ordenamientos
-  const handleSortAlph = (e) => {
-    dispatch(sortPokemonsAlphabetically(e));
-    setOrder(e);
+  const handleSortAlph = (type) => {
+    dispatch(sortPokemonsAlphabetically(type));
+    setOrder(type);
     setCurrentPage(1);
   };
-  const handleSortStrength = (e) => {
-    dispatch(sortPokemonsByStrength(e));
-    setOrder(e);
+  const handleSortStrength = (type) => {
+    dispatch(sortPokemonsByStrength(type));
+    setOrder(type);
     setCurrentPage(1);
   };
+
+  //Funciones de filtrado
+  const handleTypeFilter = (type) => {
+    dispatch(filterPokemonByType(type));
+    setOrder(type);
+    setCurrentPage(1);
+  };
+  // const handleOriginFilter = (type) => {
+  //   dispatch(filterPokemonByType(type));
+  //   setOrder(type);
+  //   setCurrentPage(1);
+  // };
 
   //Paginado
   const handlePagination = (pageNumber) => {
@@ -57,11 +71,12 @@ function Home() {
       <NavHome
         handleSortAlph={handleSortAlph}
         handleSortStrength={handleSortStrength}
+        handleTypeFilter={handleTypeFilter}
       />
 
-      {allPokemons ? (
+      {pokemons ? (
         <Pagination
-          items={allPokemons}
+          items={pokemons}
           quantityXPage={quantityXPage}
           handlePagination={handlePagination}
         />

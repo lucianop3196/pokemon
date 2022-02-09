@@ -5,7 +5,7 @@ const Sort = ({ handleSort, sortDescription}) => {
   return (
     <div>
       <select
-        name="sortAlph"
+        name="sortOption"
         onChange={(e) => {
           handleSort(e.target.value);
         }}

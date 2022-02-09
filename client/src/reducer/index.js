@@ -15,6 +15,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         allPokemons: action.payload,
         pokemons: action.payload,
+        filtered: action.payload,
       };
     }
 
@@ -32,13 +33,20 @@ function rootReducer(state = initialState, action) {
 
     case actionTypes.FILTER_POKEMONS_BY_TYPE: {
       const type = action.payload; //types debería llegar como un string "flying"
-      if (type === "all") return { ...state };
-      else {
+      if (type === "default")
         return {
           ...state,
-          pokemons: state.allPokemons?.filter((pokemon) => {
-            return pokemon.types.includes(type);
-          }),
+          pokemons: state.allPokemons,
+          filtered: state.allPokemons,
+        };
+      else {
+        let pokemonsFiltered = state.allPokemons?.filter((pokemon) => {
+          return pokemon.types.includes(type);
+        });
+        return {
+          ...state,
+          pokemons: pokemonsFiltered,
+          filtered: pokemonsFiltered
         };
       }
     }
@@ -59,7 +67,7 @@ function rootReducer(state = initialState, action) {
           }),
         };
       } else {
-        return { ...state };
+        return { ...state, pokemons: state.allPokemons };
       }
     }
 
@@ -75,19 +83,19 @@ function rootReducer(state = initialState, action) {
       if (action.payload === "asc") {
         return {
           ...state,
-          pokemons: state.allPokemons?.slice().sort((a, b) => {
+          pokemons: state.filtered?.slice().sort((a, b) => {
             return b.attack - a.attack;
           }),
         };
       } else if (action.payload === "desc") {
         return {
           ...state,
-          pokemons: state.allPokemons?.slice().sort((a, b) => {
+          pokemons: state.filtered?.slice().sort((a, b) => {
             return a.attack - b.attack;
           }),
         };
       } else {
-        return { ...state, pokemons: state.allPokemons  };
+        return { ...state, pokemons: state.filtered };
       }
     }
 
@@ -95,7 +103,7 @@ function rootReducer(state = initialState, action) {
       if (action.payload === "asc") {
         return {
           ...state,
-          pokemons: state.allPokemons?.slice().sort((a, b) => {
+          pokemons: state.filtered?.slice().sort((a, b) => {
             if (a.name > b.name) return 1;
             if (a.name < b.name) return -1;
             return 0;
@@ -104,15 +112,14 @@ function rootReducer(state = initialState, action) {
       } else if (action.payload === "desc") {
         return {
           ...state,
-          pokemons: state.allPokemons?.slice().sort((a, b) => {
+          pokemons: state.filtered?.slice().sort((a, b) => {
             if (a.name > b.name) return -1;
             if (a.name < b.name) return 1;
             return 0;
           }),
         };
-      }
-      else{
-        return {...state, pokemons: state.allPokemons}
+      } else {
+        return { ...state, pokemons: state.filtered };
       }
     }
 
