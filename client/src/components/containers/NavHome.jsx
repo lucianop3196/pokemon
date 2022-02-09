@@ -1,7 +1,7 @@
 //Componente que renderizara todos los botones de filtrado y busqueda
 import { useDispatch } from "react-redux";
 import { searchPokemon } from "../../actions";
-import SearchButton from "../SearchButton";
+import SearchButton from "../buttons/SearchButton";
 
 function NavHome() {
   const dispatch = useDispatch();

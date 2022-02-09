@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemons } from "../../actions";
+import Refresh from "../buttons/Refresh";
 import Pagination, { objIndexPagination } from "../Pagination";
 import Pokemon from "../presentationals/Pokemon";
 
@@ -14,20 +15,29 @@ function PokemonsContainer() {
   const quantityXPage = 12;
 
   useEffect(() => {
+    //llamado a la API, se traen los pokemones
     dispatch(getPokemons());
   }, []);
 
+  //Paginado
   const handlePagination = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
   const { lastItemIndex, firstItemIndex } = objIndexPagination(
     currentPage,
     quantityXPage
   );
 
+  //Función para el boton refresh.
+  const handleRefresh = () => {
+    dispatch(getPokemons());
+  };
+
   return (
     <div>
+      <div>
+        <Refresh handleRefresh={handleRefresh} />
+      </div>
       <div>
         {allPokemons ? (
           <Pagination

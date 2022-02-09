@@ -1,3 +1,4 @@
+//componente que recibe la función que trae el pokemon buscado
 import { useState } from "react";
 
 function SearchButton({ getPokemonbyName }) {
