@@ -1,14 +1,21 @@
 //Componente que renderizara todos los botones de filtrado y busqueda
-import Filter from "../buttons/Filter";
 import SearchButton from "../buttons/SearchButton";
+import Sort from "../buttons/Sort";
 
-function NavHome({handleSortAlph}) {
+function NavHome({ handleSortAlph, handleSortStrength }) {
   return (
     <div>
       <ul>
         <li>
           <SearchButton />
-          <Filter handleSortAlph={handleSortAlph}/>
+          <Sort
+            handleSort={handleSortAlph}
+            sortDescription="Orden alfabético"
+          />
+          <Sort
+            handleSort={handleSortStrength}
+            sortDescription="Orden por fuerza"
+          />
         </li>
       </ul>
     </div>

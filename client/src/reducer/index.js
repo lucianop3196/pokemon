@@ -75,17 +75,19 @@ function rootReducer(state = initialState, action) {
       if (action.payload === "asc") {
         return {
           ...state,
-          pokemons: state.allPokemons?.sort((a, b) => {
+          pokemons: state.allPokemons?.slice().sort((a, b) => {
+            return b.attack - a.attack;
+          }),
+        };
+      } else if (action.payload === "desc") {
+        return {
+          ...state,
+          pokemons: state.allPokemons?.slice().sort((a, b) => {
             return a.attack - b.attack;
           }),
         };
       } else {
-        return {
-          ...state,
-          pokemons: state.allPokemons?.sort((a, b) => {
-            return b.attack - a.attack;
-          }),
-        };
+        return { ...state, pokemons: state.allPokemons  };
       }
     }
 
@@ -93,21 +95,24 @@ function rootReducer(state = initialState, action) {
       if (action.payload === "asc") {
         return {
           ...state,
-          pokemons: state.allPokemons?.sort((a, b) => {
+          pokemons: state.allPokemons?.slice().sort((a, b) => {
             if (a.name > b.name) return 1;
             if (a.name < b.name) return -1;
             return 0;
           }),
         };
-      } else {
+      } else if (action.payload === "desc") {
         return {
           ...state,
-          pokemons: state.allPokemons?.sort((a, b) => {
+          pokemons: state.allPokemons?.slice().sort((a, b) => {
             if (a.name > b.name) return -1;
             if (a.name < b.name) return 1;
             return 0;
           }),
         };
+      }
+      else{
+        return {...state, pokemons: state.allPokemons}
       }
     }
 

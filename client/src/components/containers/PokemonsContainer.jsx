@@ -1,20 +1,13 @@
 //Componente que renderizará los componente Pokemon
 
-import { useDispatch, useSelector } from "react-redux";
-import { getPokemons } from "../../actions";
+import { useSelector } from "react-redux";
 import Refresh from "../buttons/Refresh";
 
 import Pokemon from "../presentationals/Pokemon";
 
 function PokemonsContainer({ lastItemIndex, firstItemIndex, handleRefresh }) {
   //https://react-redux.js.org/api/hooks
-  const dispatch = useDispatch();
   const pokemons = useSelector((state) => state.pokemons);
-
-  // //Función para el boton refresh.
-  // const handleRefresh = () => {
-  //   dispatch(getPokemons());
-  // };
 
   return (
     <div>

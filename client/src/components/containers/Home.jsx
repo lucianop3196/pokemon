@@ -6,6 +6,7 @@ import {
   getPokemons,
   getTypes,
   sortPokemonsAlphabetically,
+  sortPokemonsByStrength,
 } from "../../actions/index";
 import Pagination, { objIndexPagination } from "../Pagination";
 
@@ -18,18 +19,23 @@ function Home() {
   const quantityXPage = 12;
   const dispatch = useDispatch();
 
-  //Funcion de ordenamiento alfabetico
-  const handleSortAlph = (e) => {
-    dispatch(sortPokemonsAlphabetically(e));
-    setOrder(e);
-    setCurrentPage(1);
-  };
-
   //Llamado a la API para obtener types y pokemons
   useEffect(() => {
     dispatch(getTypes());
     dispatch(getPokemons());
   }, []);
+
+  //Funciones de ordenamientos
+  const handleSortAlph = (e) => {
+    dispatch(sortPokemonsAlphabetically(e));
+    setOrder(e);
+    setCurrentPage(1);
+  };
+  const handleSortStrength = (e) => {
+    dispatch(sortPokemonsByStrength(e));
+    setOrder(e);
+    setCurrentPage(1);
+  };
 
   //Paginado
   const handlePagination = (pageNumber) => {
@@ -48,7 +54,10 @@ function Home() {
 
   return (
     <div>
-      <NavHome handleSortAlph={handleSortAlph} />
+      <NavHome
+        handleSortAlph={handleSortAlph}
+        handleSortStrength={handleSortStrength}
+      />
 
       {allPokemons ? (
         <Pagination
