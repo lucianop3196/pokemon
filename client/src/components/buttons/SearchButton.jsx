@@ -1,23 +1,28 @@
 //componente que recibe la función que trae el pokemon buscado
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { searchPokemon } from "../../actions";
 
-function SearchButton({ getPokemonbyName }) {
+function SearchButton() {
   const [name, setName] = useState("");
+  const dispatch = useDispatch();
 
-  const handleSeachName = (e) => {
+  const handleSearchName = (e) => {
     setName(e.target.value);
+  };
+
+  const getPokemonbyName = (e) => {
+    e.preventDefault();
+    e.target[0].value = ""
+    return dispatch(searchPokemon(name));
   };
 
   return (
     <div>
-      <input type="search" name="searchName" onChange={handleSeachName} />
-      <button
-        onClick={() => {
-          getPokemonbyName(name);
-        }}
-      >
-        Buscar
-      </button>
+      <form onSubmit={getPokemonbyName}>
+        <input type="search" name="name" onChange={handleSearchName} />
+        <button type="submit">Buscar</button>
+      </form>
     </div>
   );
 }
