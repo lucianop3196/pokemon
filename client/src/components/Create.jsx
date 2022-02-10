@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { getPokemons, getTypes, saveNewPokemon } from "../actions";
 import BackBtn from "./buttons/BackBtn";
 
@@ -15,6 +16,7 @@ function Create() {
     types: [],
     urlImg: "",
   });
+  let navigate = useNavigate();
   const types = useSelector((state) => state.types);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -34,7 +36,6 @@ function Create() {
       return { ...prevState, types: cleanTypes };
     });
     dispatch(saveNewPokemon(dataForm));
-    console.log(dataForm);
     setDataForm({
       name: "",
       hp: "",
@@ -46,13 +47,15 @@ function Create() {
       types: [],
       urlImg: "",
     });
+    setTimeout(() => {
+      navigate(-1);
+    }, 1000);
   };
 
   const handleInput = (e) => {
     setDataForm((prevState) => {
       return { ...prevState, [e.target.name]: e.target.value };
     });
-    console.log(dataForm);
   };
 
   const handleCheckbox = (e) => {
