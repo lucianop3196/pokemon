@@ -102,30 +102,40 @@ router.post("/pokemons", async (req, res) => {
   try {
     const { name, types, urlImg, height, weight, hp, attack, defense, speed } =
       req.body;
-    const pokemonCreated = await Pokemon.create({
-      name,
-      urlImg,
-      height,
-      weight,
-      hp,
-      attack,
-      defense,
-      speed,
-    });
+    if (name) {
+      if (!hp) hp = 1;
+      if (!attack) attack = 1;
+      if (!defense) defense = 1;
+      if (!speed) speed = 1;
+      if (!height) height = 1;
+      if (!weight) weight = 1;
+      if (!types.length) types = ["unknown"];
 
-    const typeDbArr = await Type.findAll({
-      where: { name: types },
-    });
-    const typeDbId = typeDbArr?.map((p) => p.dataValues.id);
+      const pokemonCreated = await Pokemon.create({
+        name,
+        urlImg,
+        height,
+        weight,
+        hp,
+        attack,
+        defense,
+        speed,
+      });
 
-    await pokemonCreated.addType(typeDbId);
+      const typeDbArr = await Type.findAll({
+        where: { name: types },
+      });
+      const typeDbId = typeDbArr?.map((p) => p.dataValues.id);
 
-    const newPokemon = await Pokemon.findOne({
-      where: { name },
-      include: Type,
-    });
-    const newPokemonNormalized = normalizeDataDb(newPokemon);
-    return res.json(newPokemonNormalized);
+      await pokemonCreated.addType(typeDbId);
+
+      const newPokemon = await Pokemon.findOne({
+        where: { name },
+        include: Type,
+      });
+      const newPokemonNormalized = normalizeDataDb(newPokemon);
+      return res.json(newPokemonNormalized);
+    }
   } catch (e) {
     return res.status(404).json("Error ---> " + e);
   }

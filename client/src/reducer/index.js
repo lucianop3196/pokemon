@@ -6,8 +6,6 @@ const initialState = {
   allPokemons: [], //Siempre cuenta con todos los pokemones
   filtered: [], //Pokemones filtrados según corresponda.
   types: [],
-  filteredByType: [],
-  filteredBySource: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -18,8 +16,6 @@ function rootReducer(state = initialState, action) {
         allPokemons: action.payload,
         pokemons: action.payload,
         filtered: action.payload,
-        filteredBySource: action.payload,
-        filteredByType: action.payload,
       };
     }
 
@@ -78,8 +74,6 @@ function rootReducer(state = initialState, action) {
     case actionTypes.POST_POKEMON: {
       return {
         ...state,
-        pokemons: state.pokemons.push(action.payload),
-        allPokemons: state.allPokemons.push(action.payload),
       };
     }
 

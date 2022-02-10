@@ -7,12 +7,12 @@ normalizeDataDb = (pokemonDb) => {
     types: typesNormalized,
     urlImg: pokemonDb.urlImg,
     id: pokemonDb.id,
-    height: pokemonDb.height,
-    weight: pokemonDb.weight,
-    hp: pokemonDb.hp,
-    attack: pokemonDb.attack,
-    defense: pokemonDb.defense,
-    speed: pokemonDb.speed,
+    height: parseInt(pokemonDb.height),
+    weight: parseInt(pokemonDb.weight),
+    hp: parseInt(pokemonDb.hp),
+    attack: parseInt(pokemonDb.attack),
+    defense: parseInt(pokemonDb.defense),
+    speed: parseInt(pokemonDb.speed),
     createInDb: pokemonDb.createInDb,
   };
 };

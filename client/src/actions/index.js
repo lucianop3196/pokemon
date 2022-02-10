@@ -15,9 +15,11 @@ export const actionTypes = {
 
 export function getTypes() {
   return function (dispatch) {
-    return axios("http://localhost:3001/types").then((resp) => {
-      return dispatch({ type: actionTypes.GET_TYPES, payload: resp.data });
-    });
+    return axios("http://localhost:3001/types")
+      .then((resp) => {
+        return dispatch({ type: actionTypes.GET_TYPES, payload: resp.data });
+      })
+      .catch((e) => console.log(e));
   };
 }
 
@@ -38,25 +40,27 @@ export function getPokemons() {
 
 export function getPokemonById(id) {
   return function (dispatch) {
-    return axios(`http://localhost:3001/pokemon/${id}`).then((resp) => {
-      return dispatch({
-        type: actionTypes.GET_POKEMON_BY_ID,
-        payload: resp.data,
-      });
-    });
+    return axios(`http://localhost:3001/pokemon/${id}`)
+      .then((resp) => {
+        return dispatch({
+          type: actionTypes.GET_POKEMON_BY_ID,
+          payload: resp.data,
+        });
+      })
+      .catch((e) => console.log(e));
   };
 }
 
 export function searchPokemon(name) {
   return function (dispatch) {
-    return axios(`http://localhost:3001/pokemons?name=${name}`).then(
-      (response) => {
+    return axios(`http://localhost:3001/pokemons?name=${name}`)
+      .then((response) => {
         return dispatch({
           type: actionTypes.SEARCH_POKEMON,
           payload: response.data,
         });
-      }
-    );
+      })
+      .catch((e) => console.log(e));
   };
 }
 
@@ -82,7 +86,8 @@ export function saveNewPokemon(pokemon) {
       .post("http://localhost:3001/pokemons", pokemon)
       .then((resp) => {
         return dispatch({ type: actionTypes.POST_POKEMON, payload: resp });
-      });
+      })
+      .catch((e) => console.log(e));
   };
 }
 
