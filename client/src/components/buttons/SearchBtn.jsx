@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchPokemon } from "../../actions";
 
-function SearchButton() {
+function SearchBtn() {
   const [name, setName] = useState("");
   const dispatch = useDispatch();
 
@@ -27,4 +27,4 @@ function SearchButton() {
   );
 }
 
-export default SearchButton;
+export default SearchBtn;

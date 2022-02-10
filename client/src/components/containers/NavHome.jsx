@@ -1,8 +1,9 @@
 //Componente que renderizara todos los botones de filtrado y busqueda
-import SearchButton from "../buttons/SearchButton";
+import SearchBtn from "../buttons/SearchBtn";
 import Sort from "../buttons/Sort";
 import { useSelector } from "react-redux";
 import Filters from "../buttons/Filters";
+import CreateBtn from "../buttons/CreateBtn";
 
 function NavHome({
   handleSortAlph,
@@ -10,7 +11,6 @@ function NavHome({
   handleTypeFilter,
   handleSourceFilter,
 }) {
-  const pokemons = useSelector((state) => state.pokemons);
   const types = useSelector((state) => state.types);
 
   const sourceOptions = [
@@ -22,7 +22,7 @@ function NavHome({
     <div>
       <ul>
         <li>
-          <SearchButton />
+          <SearchBtn />
           <Sort
             handleSort={handleSortAlph}
             sortDescription="Sort alphabetically"
@@ -47,6 +47,9 @@ function NavHome({
             defaultDescription="Filter by source"
             handleFilter={handleSourceFilter}
           />
+        </li>
+        <li>
+          <CreateBtn />
         </li>
       </ul>
     </div>
