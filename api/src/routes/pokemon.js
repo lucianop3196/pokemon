@@ -100,8 +100,9 @@ router.get("/pokemon/:idPokemon", async (req, res) => {
 
 router.post("/pokemons", async (req, res) => {
   try {
-    const { name, types, urlImg, height, weight, hp, attack, defense, speed } =
+    let { name, types, urlImg, height, weight, hp, attack, defense, speed } =
       req.body;
+    if (!name) return res.status(404).send("Necessary parameters not found");
     if (name) {
       if (!hp) hp = 1;
       if (!attack) attack = 1;
@@ -110,7 +111,6 @@ router.post("/pokemons", async (req, res) => {
       if (!height) height = 1;
       if (!weight) weight = 1;
       if (!types.length) types = ["unknown"];
-
       const pokemonCreated = await Pokemon.create({
         name,
         urlImg,

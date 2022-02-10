@@ -6,12 +6,12 @@ import BackBtn from "./buttons/BackBtn";
 function Create() {
   const [dataForm, setDataForm] = useState({
     name: "",
-    hp: 1,
-    attack: 1,
-    defense: 1,
-    speed: 1,
-    height: 1,
-    weight: 1,
+    hp: "",
+    attack: "",
+    defense: "",
+    speed: "",
+    height: "",
+    weight: "",
     types: [],
     urlImg: "",
   });
@@ -22,7 +22,6 @@ function Create() {
     dispatch(getPokemons());
   }, []);
 
-  //Funciones para manejar
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const cleanTypes = dataForm.types?.reduce((prev, actual) => {
@@ -36,6 +35,17 @@ function Create() {
     });
     dispatch(saveNewPokemon(dataForm));
     console.log(dataForm);
+    setDataForm({
+      name: "",
+      hp: "",
+      attack: "",
+      defense: "",
+      speed: "",
+      height: "",
+      weight: "",
+      types: [],
+      urlImg: "",
+    });
   };
 
   const handleInput = (e) => {
