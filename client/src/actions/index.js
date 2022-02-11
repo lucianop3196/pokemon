@@ -11,6 +11,7 @@ export const actionTypes = {
   SORT_POKEMONS_BY_STRENGTH: "SORT_POKEMONS_BY_STRENGTH",
   SORT_POKEMONS_ALPHABETICALLY: "SORT_POKEMONS_ALPHABETICALLY",
   SLICE_POKEMONS: "SLICE_POKEMONS",
+  CLEAR_POKEMONS: "CLEAR_POKEMONS",
 };
 
 export function getTypes() {
@@ -104,5 +105,11 @@ export function sortPokemonsAlphabetically(typeOfSort) {
   return {
     type: actionTypes.SORT_POKEMONS_ALPHABETICALLY,
     payload: typeOfSort,
+  };
+}
+
+export function clearPokemons() {
+  return {
+    type: actionTypes.CLEAR_POKEMONS,
   };
 }

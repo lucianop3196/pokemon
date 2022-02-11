@@ -121,6 +121,10 @@ function rootReducer(state = initialState, action) {
       }
     }
 
+    case actionTypes.CLEAR_POKEMONS: {
+      return { ...state, pokemons: [], allPokemons: [], filtered: [] };
+    }
+
     default:
       return { ...state };
   }

@@ -25,7 +25,7 @@ function Home() {
   useEffect(() => {
     dispatch(getTypes());
     dispatch(getPokemons());
-  }, []);
+  }, [dispatch]);
 
   //Funciones de ordenamientos
   const handleSortAlph = (type) => {

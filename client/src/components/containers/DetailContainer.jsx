@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { getPokemonById } from "../../actions";
-import Pokemon from "../presentationals/Pokemon";
+import { clearPokemons, getPokemonById } from "../../actions";
 import PokemonDetail from "../presentationals/PokemonDetail";
+import BackBtn from "../buttons/BackBtn";
 
 function DetailContainer() {
   const pokemon = useSelector((state) => state.pokemon);
@@ -11,12 +11,14 @@ function DetailContainer() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    return dispatch(getPokemonById(id));
-  }, []);
+    dispatch(clearPokemons());
+    dispatch(getPokemonById(id));
+  }, [dispatch, id]);
 
   return (
     <div>
-      <PokemonDetail pokemonDetail={pokemon}/>
+      <BackBtn />
+      <PokemonDetail pokemonDetail={pokemon} />
     </div>
   );
 }

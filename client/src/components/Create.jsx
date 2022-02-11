@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getPokemons, getTypes, saveNewPokemon } from "../actions";
+import { clearPokemons, getPokemons, getTypes, saveNewPokemon } from "../actions";
 import BackBtn from "./buttons/BackBtn";
 
 function Create() {
@@ -21,7 +21,8 @@ function Create() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTypes());
-    dispatch(getPokemons());
+    dispatch(clearPokemons())
+    // dispatch(getPokemons());
   }, []);
 
   const handleOnSubmit = (e) => {
