@@ -2,6 +2,7 @@
 
 import { useSelector } from "react-redux";
 import Refresh from "../buttons/Refresh";
+import { Link } from "react-router-dom";
 
 import Pokemon from "../presentationals/Pokemon";
 
@@ -21,7 +22,11 @@ function PokemonsContainer({ lastItemIndex, firstItemIndex, handleRefresh }) {
           </>
         ) : (
           pokemons?.slice(firstItemIndex, lastItemIndex).map((pokemon) => {
-            return <Pokemon key={pokemon.id} props={pokemon} />;
+            return (
+              <Link to={`/detail/${pokemon.id}`} key={pokemon.id}>
+                <Pokemon props={pokemon} />
+              </Link>
+            );
           })
         )}
       </div>
