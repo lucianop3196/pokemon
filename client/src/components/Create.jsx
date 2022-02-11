@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { clearPokemons, getPokemons, getTypes, saveNewPokemon } from "../actions";
+import { clearPokemons, getTypes, saveNewPokemon } from "../actions";
 import BackBtn from "./buttons/BackBtn";
+import validateForm from "../utils/validateForm";
 
 function Create() {
   const [dataForm, setDataForm] = useState({
@@ -16,14 +17,34 @@ function Create() {
     types: [],
     urlImg: "",
   });
+  const [error, setError] = useState({}); //Estado local para validar el formulario
+  const [disabled, setDisabled] = useState(true); //Habilitador del botón submit cuando no haya ningun error en el formulario
+
   let navigate = useNavigate();
   const types = useSelector((state) => state.types);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getTypes());
-    dispatch(clearPokemons())
-    // dispatch(getPokemons());
+    dispatch(clearPokemons());
   }, []);
+
+  useEffect(() => {
+    if (
+      dataForm.name.length > 0 &&
+      dataForm.types.length < 3 &&
+      !error.hasOwnProperty("img") &&
+      !error.hasOwnProperty("hp") &&
+      !error.hasOwnProperty("attack") &&
+      !error.hasOwnProperty("defense") &&
+      !error.hasOwnProperty("speed") &&
+      !error.hasOwnProperty("height") &&
+      !error.hasOwnProperty("weight")
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [error, dataForm, disabled]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -54,8 +75,9 @@ function Create() {
   };
 
   const handleInput = (e) => {
+    setError(validateForm({ ...dataForm, [e.target.name]: e.target.value }));
     setDataForm((prevState) => {
-      return { ...prevState, [e.target.name]: e.target.value };
+      return { ...prevState, [e.target.name]: e.target.value.trim() };
     });
   };
 
@@ -76,32 +98,6 @@ function Create() {
     }
   };
 
-
-
-
-
-
-  // function validate(input) {
-  //   let errors = {};
-  //   if (!input.name) errors.name = "Nombre Requerido";
-  //   if (input.hp < 0) errors.hp = "Inválido!";
-  //   if (input.strength < 0) errors.strength = "Inválido!";
-  //   if (input.defense < 0) errors.defense = "Inválido!";
-  //   if (input.speed < 0) errors.speed = "Inválido!";
-  //   if (input.height < 0) errors.height = "Inválido!";
-  //   if (input.weight < 0) errors.weight = "Inválido!";
-  //   if (!urlPatternValidation(input.img) && input.img !== "")
-  //     errors.img = "Formato no soportado";
-  //   return errors;
-  // }
-
-
-
-
-
-
-
-
   return (
     <div>
       <BackBtn />
@@ -115,6 +111,7 @@ function Create() {
           required
           value={dataForm.name}
         />
+        {error.name && <p>{error.name}</p>}
 
         <label htmlFor="urlImg">URL Image:</label>
         <input
@@ -124,6 +121,7 @@ function Create() {
           name="urlImg"
           value={dataForm.urlImg}
         />
+        {error.urlImg && <p>{error.urlImg}</p>}
 
         <label htmlFor="height">Height:</label>
         <input
@@ -133,6 +131,7 @@ function Create() {
           name="height"
           value={dataForm.height}
         />
+        {error.height && <p>{error.height}</p>}
 
         <label htmlFor="weight">Weight:</label>
         <input
@@ -142,6 +141,7 @@ function Create() {
           name="weight"
           value={dataForm.weight}
         />
+        {error.weight && <p>{error.weight}</p>}
 
         <label htmlFor="hp">HP:</label>
         <input
@@ -151,6 +151,7 @@ function Create() {
           name="hp"
           value={dataForm.hp}
         />
+        {error.hp && <p>{error.hp}</p>}
 
         <label htmlFor="attack">Attack:</label>
         <input
@@ -160,6 +161,7 @@ function Create() {
           name="attack"
           value={dataForm.attack}
         />
+        {error.attack && <p>{error.attack}</p>}
 
         <label htmlFor="defense">Defense:</label>
         <input
@@ -169,6 +171,7 @@ function Create() {
           name="defense"
           value={dataForm.defense}
         />
+        {error.defense && <p>{error.defense}</p>}
 
         <label htmlFor="speed">Speed:</label>
         <input
@@ -178,6 +181,7 @@ function Create() {
           name="speed"
           value={dataForm.speed}
         />
+        {error.speed && <p>{error.speed}</p>}
 
         {types?.map((type) => {
           return (
@@ -192,8 +196,9 @@ function Create() {
             </label>
           );
         })}
+        {dataForm.types.length > 2 && <p>Choose only two types</p>}
 
-        <input type="submit" value="Create" />
+        <input type="submit" value="Create" disabled={disabled} />
       </form>
     </div>
   );
