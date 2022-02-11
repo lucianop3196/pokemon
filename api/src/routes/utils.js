@@ -1,9 +1,11 @@
 // Función para normalizar la info que llega de types en las consultas a la db
 normalizeDataDb = (pokemonDb) => {
-  const typesNormalized = pokemonDb.dataValues.types?.map((type) => type.name);
+  const typesNormalized = pokemonDb.dataValues.types?.map(
+    (type) => type.name.charAt(0).toUpperCase() + type.name.slice(1)
+  );
 
   return {
-    name: pokemonDb.name,
+    name: pokemonDb.name.charAt(0).toUpperCase() + pokemonDb.name.slice(1),
     types: typesNormalized,
     urlImg: pokemonDb.urlImg,
     id: pokemonDb.id,
@@ -20,9 +22,11 @@ normalizeDataDb = (pokemonDb) => {
 //Función para normalizar la respuesta que llega de la api
 normalizeDataApi = (responseAPI) => {
   return {
-    name: responseAPI.data.name,
+    name:
+      responseAPI.data.name.charAt(0).toUpperCase() +
+      responseAPI.data.name.slice(1),
     types: responseAPI.data.types?.map((elem) => {
-      return elem.type.name;
+      return elem.type.name.charAt(0).toUpperCase() + elem.type.name.slice(1);
     }),
     urlImg: responseAPI.data.sprites.other["official-artwork"].front_default,
     id: responseAPI.data.id,
@@ -39,4 +43,14 @@ normalizeDataApi = (responseAPI) => {
     createInDb: false,
   };
 };
-module.exports = { normalizeDataApi, normalizeDataDb };
+
+normalizeDataTypes = (types) => {
+  return types?.map((type) => {
+    return {
+      ...type.dataValues,
+      name: type.dataValues.name.charAt(0).toUpperCase() + type.name.slice(1),
+    };
+  });
+};
+
+module.exports = { normalizeDataApi, normalizeDataDb, normalizeDataTypes };

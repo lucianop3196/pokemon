@@ -16,8 +16,9 @@ router.get("/pokemons", async (req, res) => {
   try {
     /////////////Llamada a DB por name/////////////////
     if (name) {
+      const nameLower = name.trim().toLowerCase(); //Lo busco en DB con minuscula ya que así lo almacené
       const pokemonDbByName = await Pokemon.findOne({
-        where: { name },
+        where: { name: nameLower },
         include: Type,
       });
       if (pokemonDbByName !== null)
@@ -102,6 +103,7 @@ router.post("/pokemons", async (req, res) => {
   try {
     let { name, types, urlImg, height, weight, hp, attack, defense, speed } =
       req.body;
+
     if (!name) return res.status(404).send("Necessary parameters not found");
     if (name) {
       if (!hp) hp = 1;
@@ -111,8 +113,11 @@ router.post("/pokemons", async (req, res) => {
       if (!height) height = 1;
       if (!weight) weight = 1;
       if (!types.length) types = ["unknown"];
+
+      const nameLower = name.trim().toLowerCase(); //Lo almaceno con minuscula en Db, así estan en la API
+      const typesLower = types?.map((type) => type.toLowerCase());
       const pokemonCreated = await Pokemon.create({
-        name,
+        name: nameLower,
         urlImg,
         height,
         weight,
@@ -123,14 +128,15 @@ router.post("/pokemons", async (req, res) => {
       });
 
       const typeDbArr = await Type.findAll({
-        where: { name: types },
+        where: { name: typesLower },
       });
+
       const typeDbId = typeDbArr?.map((p) => p.dataValues.id);
 
       await pokemonCreated.addType(typeDbId);
 
       const newPokemon = await Pokemon.findOne({
-        where: { name },
+        where: { name: nameLower },
         include: Type,
       });
       const newPokemonNormalized = normalizeDataDb(newPokemon);

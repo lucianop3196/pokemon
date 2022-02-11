@@ -76,6 +76,32 @@ function Create() {
     }
   };
 
+
+
+
+
+
+  // function validate(input) {
+  //   let errors = {};
+  //   if (!input.name) errors.name = "Nombre Requerido";
+  //   if (input.hp < 0) errors.hp = "Inválido!";
+  //   if (input.strength < 0) errors.strength = "Inválido!";
+  //   if (input.defense < 0) errors.defense = "Inválido!";
+  //   if (input.speed < 0) errors.speed = "Inválido!";
+  //   if (input.height < 0) errors.height = "Inválido!";
+  //   if (input.weight < 0) errors.weight = "Inválido!";
+  //   if (!urlPatternValidation(input.img) && input.img !== "")
+  //     errors.img = "Formato no soportado";
+  //   return errors;
+  // }
+
+
+
+
+
+
+
+
   return (
     <div>
       <BackBtn />

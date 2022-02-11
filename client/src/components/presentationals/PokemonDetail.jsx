@@ -13,7 +13,6 @@ const PokemonDetail = ({ pokemonDetail }) => {
     height,
     weight,
   } = pokemonDetail;
-console.log(pokemonDetail);
   return (
     <div>
       <img src={urlImg} alt="Pokemon" />
