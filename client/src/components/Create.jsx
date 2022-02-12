@@ -57,6 +57,11 @@ function Create() {
     setDataForm((prevState) => {
       return { ...prevState, types: cleanTypes };
     });
+    if (dataForm.urlImg.length === 0) {
+      dataForm.urlImg =
+        "https://assets.pokemon.com/static2/_ui/img/og-default-image.jpeg";
+    }
+
     dispatch(saveNewPokemon(dataForm));
     setDataForm({
       name: "",

@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { clearPokemons, getPokemonById } from "../../actions";
 import PokemonDetail from "../presentationals/PokemonDetail";
 import BackBtn from "../buttons/BackBtn";
-import spinner from "../../assets/spinner.gif";
+import spinner from "../../assets/spinner2.gif";
 
 function DetailContainer() {
   const pokemon = useSelector((state) => state.pokemon);

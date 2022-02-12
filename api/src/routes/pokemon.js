@@ -26,7 +26,7 @@ router.get("/pokemons", async (req, res) => {
       else {
         ////////////////Consulta a la API por name/////////////////
         const dataApiResponse = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/${name}`
+          `https://pokeapi.co/api/v2/pokemon/${nameLower}`
         );
         const dataApiByName = normalizeDataApi(dataApiResponse);
 

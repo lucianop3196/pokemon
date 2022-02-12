@@ -3,7 +3,7 @@
 import { useSelector } from "react-redux";
 import Refresh from "../buttons/Refresh";
 import { Link } from "react-router-dom";
-
+import { pokemonContainer } from "../../styles/PokemonsContainer.module.css";
 import Pokemon from "../presentationals/Pokemon";
 
 function PokemonsContainer({ lastItemIndex, firstItemIndex, handleRefresh }) {
@@ -11,12 +11,12 @@ function PokemonsContainer({ lastItemIndex, firstItemIndex, handleRefresh }) {
   const pokemons = useSelector((state) => state.pokemons);
 
   return (
-    <div>
+    <>
       <div>
         <Refresh handleRefresh={handleRefresh} />
       </div>
 
-      <div>
+      <div className={pokemonContainer}>
         {Array.isArray(pokemons) === false ? (
           <>
             <Pokemon key={pokemons.id} props={pokemons} />
@@ -31,7 +31,7 @@ function PokemonsContainer({ lastItemIndex, firstItemIndex, handleRefresh }) {
           })
         )}
       </div>
-    </div>
+    </>
   );
 }
 

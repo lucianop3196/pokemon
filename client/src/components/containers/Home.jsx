@@ -13,6 +13,7 @@ import {
 } from "../../actions/index";
 import Pagination, { objIndexPagination } from "../Pagination";
 import spinner from "../../assets/spinner.gif";
+import { homeContainer, spinnerStyle } from "../../styles/Home.module.css";
 
 function Home() {
   //Hooks para manejar el estado local y el renderizado de mi componente
@@ -72,30 +73,36 @@ function Home() {
   };
 
   return (
-    <div>
-      <NavHome
-        handleSortAlph={handleSortAlph}
-        handleSortStrength={handleSortStrength}
-        handleTypeFilter={handleTypeFilter}
-        handleSourceFilter={handleSourceFilter}
-      />
-
-      {pokemons ? (
-        <Pagination
-          items={pokemons}
-          quantityXPage={quantityXPage}
-          handlePagination={handlePagination}
+    <div className={homeContainer}>
+      <div>
+        <NavHome
+          handleSortAlph={handleSortAlph}
+          handleSortStrength={handleSortStrength}
+          handleTypeFilter={handleTypeFilter}
+          handleSourceFilter={handleSourceFilter}
         />
-      ) : null}
+      </div>
+
+      <div>
+        {pokemons ? (
+          <Pagination
+            items={pokemons}
+            quantityXPage={quantityXPage}
+            handlePagination={handlePagination}
+          />
+        ) : null}
+      </div>
 
       {spinnerLoader ? (
-        <img src={spinner} alt="...loading" />
+        <img src={spinner} alt="...loading" className={spinnerStyle} />
       ) : (
-        <PokemonsContainer
-          handleRefresh={handleRefresh}
-          lastItemIndex={lastItemIndex}
-          firstItemIndex={firstItemIndex}
-        />
+        <div>
+          <PokemonsContainer
+            handleRefresh={handleRefresh}
+            lastItemIndex={lastItemIndex}
+            firstItemIndex={firstItemIndex}
+          />
+        </div>
       )}
     </div>
   );

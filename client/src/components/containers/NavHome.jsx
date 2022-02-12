@@ -4,6 +4,7 @@ import Sort from "../buttons/Sort";
 import { useSelector } from "react-redux";
 import Filters from "../buttons/Filters";
 import CreateBtn from "../buttons/CreateBtn";
+import styles from "../../styles/NavHome.module.css"
 
 function NavHome({
   handleSortAlph,
@@ -19,10 +20,12 @@ function NavHome({
   ];
 
   return (
-    <div>
-      <ul>
+    <>
+      <ul className={styles.navhome_ul}>
         <li>
           <SearchBtn />
+        </li>
+        <li>
           <Sort
             handleSort={handleSortAlph}
             sortDescription="Sort alphabetically"
@@ -52,7 +55,7 @@ function NavHome({
           <CreateBtn />
         </li>
       </ul>
-    </div>
+    </>
   );
 }
 

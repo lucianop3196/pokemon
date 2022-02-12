@@ -1,0 +1,11 @@
+.homeBtn{ 
+    background-image: url("../assets/homeButton.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 5vw;
+    height: 7vh;
+    position: absolute;
+    left: 250px;
+    top: 130px;
+}
