@@ -26,7 +26,7 @@ function Create() {
   useEffect(() => {
     dispatch(getTypes());
     dispatch(clearPokemons());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (
