@@ -73,7 +73,7 @@ router.get("/pokemons", async (req, res) => {
     const totalPokemons = pokemonsApi.concat(dataDBNormalized);
     return res.json(totalPokemons);
   } catch (error) {
-    res.status(404).json("No se encontraron el/los pokemons. " + error);
+    res.status(404).json({msg: "No se encontraron el/los pokemons. " + error});
   }
 });
 

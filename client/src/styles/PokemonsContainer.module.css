@@ -1,10 +1,17 @@
 .pokemonContainer {
   height: 350px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+
+  /* height: 350px;
   display: grid;
   padding: 1.5%;
   grid-template-columns: auto auto auto;
   grid-column-gap: 9px;
   grid-row-gap: 20px;
   justify-content: space-evenly;
-  align-items: stretch;
+  align-items: stretch; */
+
 }

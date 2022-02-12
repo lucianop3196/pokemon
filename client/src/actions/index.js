@@ -22,7 +22,12 @@ export function getTypes() {
       .then((resp) => {
         return dispatch({ type: actionTypes.GET_TYPES, payload: resp.data });
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        return alert(
+          "Ha ocurrido un error, por favor, ingrese al sitio web nuevamente"
+        );
+      });
   };
 }
 
@@ -35,9 +40,10 @@ export function getPokemons() {
           payload: response.data,
         });
       })
-      .catch((e) =>
-        console.log("Ha ocurrido un error. Porfvor, intente nuevamnete " + e)
-      );
+      .catch((e) => {
+        console.log(e);
+        return alert("Ha ocurrido un error, intente ingresar nuevamente");
+      });
   };
 }
 
@@ -50,7 +56,10 @@ export function getPokemonById(id) {
           payload: resp.data,
         });
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        return alert("Hubo un error, intentelo nuevamente");
+      });
   };
 }
 
@@ -63,7 +72,10 @@ export function searchPokemon(name) {
           payload: response.data,
         });
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        return alert("No se encontró el Pokemon");
+      });
   };
 }
 
@@ -90,7 +102,12 @@ export function saveNewPokemon(pokemon) {
       .then((resp) => {
         return dispatch({ type: actionTypes.POST_POKEMON, payload: resp });
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        return alert(
+          "El pokemon no se ha creado correctamente, por favor ingrese los datos nuevamente"
+        );
+      });
   };
 }
 
