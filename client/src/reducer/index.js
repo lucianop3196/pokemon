@@ -6,6 +6,7 @@ const initialState = {
   allPokemons: [], //Siempre cuenta con todos los pokemones
   filtered: [], //Pokemones filtrados según corresponda.
   types: [],
+  spinnerLoader: true,
 };
 
 function rootReducer(state = initialState, action) {
@@ -16,6 +17,7 @@ function rootReducer(state = initialState, action) {
         allPokemons: action.payload,
         pokemons: action.payload,
         filtered: action.payload,
+        spinnerLoader: false,
       };
     }
 
@@ -24,11 +26,11 @@ function rootReducer(state = initialState, action) {
     }
 
     case actionTypes.GET_POKEMON_BY_ID: {
-      return { ...state, pokemon: action.payload };
+      return { ...state, pokemon: action.payload, spinnerLoader: false };
     }
 
     case actionTypes.SEARCH_POKEMON: {
-      return { ...state, pokemons: action.payload };
+      return { ...state, pokemons: action.payload, spinnerLoader: false };
     }
 
     case actionTypes.FILTER_POKEMONS_BY_TYPE: {
@@ -122,7 +124,27 @@ function rootReducer(state = initialState, action) {
     }
 
     case actionTypes.CLEAR_POKEMONS: {
-      return { ...state, pokemons: [], allPokemons: [], filtered: [] };
+      return {
+        ...state,
+        pokemons: [],
+        allPokemons: [],
+        filtered: [],
+        spinnerLoader: true,
+      };
+    }
+
+    case actionTypes.LOADER_TRUE: {
+      return {
+        ...state,
+        spinnerLoader: true,
+      };
+    }
+
+    case actionTypes.LOADER_FALSE: {
+      return {
+        ...state,
+        spinnerLoader: false,
+      };
     }
 
     default:

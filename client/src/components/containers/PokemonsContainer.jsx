@@ -15,6 +15,7 @@ function PokemonsContainer({ lastItemIndex, firstItemIndex, handleRefresh }) {
       <div>
         <Refresh handleRefresh={handleRefresh} />
       </div>
+
       <div>
         {Array.isArray(pokemons) === false ? (
           <>

@@ -7,15 +7,18 @@ import {
   filterPokemonCreated,
   getPokemons,
   getTypes,
+  setLoaderTrue,
   sortPokemonsAlphabetically,
   sortPokemonsByStrength,
 } from "../../actions/index";
 import Pagination, { objIndexPagination } from "../Pagination";
+import spinner from "../../assets/spinner.gif";
 
 function Home() {
   //Hooks para manejar el estado local y el renderizado de mi componente
   const [order, setOrder] = useState(""); // Hook para manejar el ordenamiento
   const [currentPage, setCurrentPage] = useState(1); // Hook para manejar el paginado
+  const spinnerLoader = useSelector((state) => state.spinnerLoader);
 
   const pokemons = useSelector((state) => state.pokemons);
   const dispatch = useDispatch();
@@ -23,6 +26,7 @@ function Home() {
 
   //Llamado a la API para obtener types y pokemons
   useEffect(() => {
+    dispatch(setLoaderTrue());
     dispatch(getTypes());
     dispatch(getPokemons());
   }, [dispatch]);
@@ -62,6 +66,7 @@ function Home() {
 
   //Función para el boton refresh. Setea la pagina en 1
   const handleRefresh = () => {
+    dispatch(setLoaderTrue());
     dispatch(getPokemons());
     setCurrentPage(1);
   };
@@ -83,13 +88,25 @@ function Home() {
         />
       ) : null}
 
-      <PokemonsContainer
-        handleRefresh={handleRefresh}
-        lastItemIndex={lastItemIndex}
-        firstItemIndex={firstItemIndex}
-      />
+      {spinnerLoader ? (
+        <img src={spinner} alt="...loading" />
+      ) : (
+        <PokemonsContainer
+          handleRefresh={handleRefresh}
+          lastItemIndex={lastItemIndex}
+          firstItemIndex={firstItemIndex}
+        />
+      )}
     </div>
   );
 }
 
 export default Home;
+
+// useEffect(() => {
+//     if (pokemons.length === 0) {
+//       return setSpinnerLoading(true);
+//     } else {
+//       return setSpinnerLoading(false);
+//     }
+//   }, [pokemons]);
