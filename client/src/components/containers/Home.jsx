@@ -83,7 +83,7 @@ function Home() {
         />
       </div>
 
-      <div>
+      <>
         {pokemons ? (
           <Pagination
             items={pokemons}
@@ -91,7 +91,7 @@ function Home() {
             handlePagination={handlePagination}
           />
         ) : null}
-      </div>
+      </>
 
       {spinnerLoader ? (
         <img src={spinner} alt="...loading" className={spinnerStyle} />
