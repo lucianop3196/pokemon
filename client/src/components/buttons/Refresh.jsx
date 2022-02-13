@@ -1,7 +1,9 @@
+import { homeBtn } from "../../styles/Buttons.module.css";
+
 export default function Refresh({ handleRefresh }) {
   return (
     <div>
-      <button onClick={() => handleRefresh()}>Reset</button>
+      <button className={homeBtn} onClick={() => handleRefresh()} />
     </div>
   );
 }
