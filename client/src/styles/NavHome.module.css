@@ -1,3 +1,9 @@
 .navhome_ul {
     display: flex;
+    list-style-type: none;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+.navhome_ul li {
+    margin: 15px;
 }
