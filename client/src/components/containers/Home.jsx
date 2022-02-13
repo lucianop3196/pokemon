@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import NavHome from "./NavHome";
 import PokemonsContainer from "./PokemonsContainer";
+import Refresh from "../buttons/Refresh";
 import { useDispatch, useSelector } from "react-redux";
 import {
   filterPokemonByType,
@@ -82,13 +83,14 @@ function Home() {
           handleSourceFilter={handleSourceFilter}
         />
       </div>
-
+      <Refresh handleRefresh={handleRefresh} />
       <>
-        {pokemons ? (
+        {!spinnerLoader ? (
           <Pagination
             items={pokemons}
             quantityXPage={quantityXPage}
             handlePagination={handlePagination}
+            currentPage={currentPage}
           />
         ) : null}
       </>
@@ -98,7 +100,6 @@ function Home() {
       ) : (
         <div>
           <PokemonsContainer
-            handleRefresh={handleRefresh}
             lastItemIndex={lastItemIndex}
             firstItemIndex={firstItemIndex}
           />

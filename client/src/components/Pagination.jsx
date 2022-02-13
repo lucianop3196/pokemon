@@ -1,5 +1,4 @@
 //Componente que renderiza los botones, y les asocia un evento para modificar el estado local de pokemonContainer
-import { useState } from "react";
 import {
   wrapperPagination,
   pagination,
@@ -8,9 +7,8 @@ import {
   is_active,
 } from "../styles/Buttons.module.css";
 
-function Pagination({ items, quantityXPage, handlePagination }) {
+function Pagination({ items, quantityXPage, handlePagination, currentPage }) {
   //handlePagination, función que setea la currentPage de mi container
-  const [activePage, setActivePage] = useState(1); //Estado para manejar el style del botón.
 
   //Bluce for me genera cantidad de botones que necesito
   const pages = Math.ceil(items.length / quantityXPage);
@@ -27,10 +25,9 @@ function Pagination({ items, quantityXPage, handlePagination }) {
             <li className={pagination__item} key={pageNumber}>
               <button
                 className={`${pagination__link} ${
-                  pageNumber === activePage ? is_active : ""
+                  pageNumber === currentPage ? is_active : ""
                 }`}
                 onClick={() => {
-                  setActivePage(pageNumber);
                   return handlePagination(pageNumber);
                 }}
               >
