@@ -20,7 +20,7 @@ function Create() {
   });
   const [error, setError] = useState({}); //Estado local para validar el formulario
   const [disabled, setDisabled] = useState(true); //Habilitador del botón submit cuando no haya ningun error en el formulario
-
+  console.log(disabled)
   let navigate = useNavigate();
   const types = useSelector((state) => state.types);
   const dispatch = useDispatch();
@@ -32,8 +32,9 @@ function Create() {
   useEffect(() => {
     if (
       dataForm.name.length > 0 &&
+      dataForm.name.length <= 10 &&
       dataForm.types.length < 3 &&
-      !error.hasOwnProperty("img") &&
+      !error.hasOwnProperty("urlImg") &&
       !error.hasOwnProperty("hp") &&
       !error.hasOwnProperty("attack") &&
       !error.hasOwnProperty("defense") &&
@@ -238,6 +239,7 @@ function Create() {
           value="Create"
           disabled={disabled}
           className={`${styles.form_button} ${disabled || styles.is_valid}`}
+          
         />
       </form>
     </div>

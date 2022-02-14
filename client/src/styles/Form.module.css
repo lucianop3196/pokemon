@@ -2,10 +2,9 @@
   /* width: 100%; */
  
 	max-width: 100%;
-	padding: 10px 20px;
 	background: #f4f7f8;
 	margin: 10px auto;
-	padding: 5% 400px 10% 400px;
+	padding: 5% 300px 10% 300px;
 	border-radius: 8px;
 
 }
@@ -23,7 +22,7 @@
 .creationFormGrid {
   display: grid;
   padding: 1.5%;
-  grid-template-columns: 150px 150px;
+  grid-template-columns: 180px 180px;
   grid-column-gap: 25%;
   justify-content: space-evenly;
 }
