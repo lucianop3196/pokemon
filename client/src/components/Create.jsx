@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { clearPokemons, getTypes, saveNewPokemon } from "../actions";
 import BackBtn from "./buttons/BackBtn";
 import validateForm from "../utils/validateForm";
+import styles from "../styles/Form.module.css";
 
 function Create() {
   const [dataForm, setDataForm] = useState({
@@ -104,106 +105,140 @@ function Create() {
   };
 
   return (
-    <div>
+    <div className={styles.formContainer}>
       <BackBtn />
-      <form onSubmit={handleOnSubmit}>
-        <label htmlFor="name">Name:</label>
-        <input
-          onChange={handleInput}
-          type="text"
-          id="name"
-          name="name"
-          required
-          value={dataForm.name}
-        />
-        {error.name && <p>{error.name}</p>}
-
-        <label htmlFor="urlImg">URL Image:</label>
-        <input
-          onChange={handleInput}
-          type="url"
-          id="urlImg"
-          name="urlImg"
-          value={dataForm.urlImg}
-        />
-        {error.urlImg && <p>{error.urlImg}</p>}
-
-        <label htmlFor="height">Height:</label>
-        <input
-          onChange={handleInput}
-          type="number"
-          id="height"
-          name="height"
-          value={dataForm.height}
-        />
-        {error.height && <p>{error.height}</p>}
-
-        <label htmlFor="weight">Weight:</label>
-        <input
-          onChange={handleInput}
-          type="number"
-          id="weight"
-          name="weight"
-          value={dataForm.weight}
-        />
-        {error.weight && <p>{error.weight}</p>}
-
-        <label htmlFor="hp">HP:</label>
-        <input
-          onChange={handleInput}
-          type="number"
-          id="hp"
-          name="hp"
-          value={dataForm.hp}
-        />
-        {error.hp && <p>{error.hp}</p>}
-
-        <label htmlFor="attack">Attack:</label>
-        <input
-          onChange={handleInput}
-          type="number"
-          id="attack"
-          name="attack"
-          value={dataForm.attack}
-        />
-        {error.attack && <p>{error.attack}</p>}
-
-        <label htmlFor="defense">Defense:</label>
-        <input
-          onChange={handleInput}
-          type="number"
-          id="defense"
-          name="defense"
-          value={dataForm.defense}
-        />
-        {error.defense && <p>{error.defense}</p>}
-
-        <label htmlFor="speed">Speed:</label>
-        <input
-          onChange={handleInput}
-          type="number"
-          id="speed"
-          name="speed"
-          value={dataForm.speed}
-        />
-        {error.speed && <p>{error.speed}</p>}
-
-        {types?.map((type) => {
-          return (
-            <label key={type.id}>
-              <input
-                type="checkbox"
-                name="types"
-                value={type.name}
-                onChange={(e) => handleCheckbox(e)}
-              />
-              {type.name}
-            </label>
-          );
-        })}
+      <h2>Create your own Pokemon!!</h2>
+      <form onSubmit={handleOnSubmit} className={styles.creationForm}>
+        <div className={styles.creationFormGrid}>
+          <div className={styles.question}>
+            <input
+              className={styles.input_form}
+              onChange={handleInput}
+              type="text"
+              id="name"
+              name="name"
+              required
+              autoComplete="off"
+              value={dataForm.name}
+            />
+            <label htmlFor="name">Name:</label>
+            {error.name && <p>{error.name}</p>}
+          </div>
+          <div className={styles.question}>
+            <input
+              className={styles.input_form}
+              onChange={handleInput}
+              type="url"
+              id="urlImg"
+              name="urlImg"
+              autoComplete="off"
+              value={dataForm.urlImg}
+            />
+            <label htmlFor="urlImg">URL Image:</label>
+            {error.urlImg && <p>{error.urlImg}</p>}
+          </div>
+          <div className={styles.question}>
+            <input
+              className={styles.input_form}
+              onChange={handleInput}
+              type="number"
+              id="height"
+              name="height"
+              autoComplete="off"
+              value={dataForm.height}
+            />
+            <label htmlFor="height">Height:</label>
+            {error.height && <p>{error.height}</p>}
+          </div>
+          <div className={styles.question}>
+            <input
+              className={styles.input_form}
+              onChange={handleInput}
+              type="number"
+              id="weight"
+              name="weight"
+              autoComplete="off"
+              value={dataForm.weight}
+            />
+            <label htmlFor="weight">Weight:</label>
+            {error.weight && <p>{error.weight}</p>}
+          </div>
+          <div className={styles.question}>
+            <input
+              className={styles.input_form}
+              onChange={handleInput}
+              type="number"
+              id="hp"
+              name="hp"
+              autoComplete="off"
+              value={dataForm.hp}
+            />
+            <label htmlFor="hp">HP:</label>
+            {error.hp && <p>{error.hp}</p>}
+          </div>
+          <div className={styles.question}>
+            <input
+              className={styles.input_form}
+              onChange={handleInput}
+              type="number"
+              id="attack"
+              name="attack"
+              autoComplete="off"
+              value={dataForm.attack}
+            />
+            <label htmlFor="attack">Attack:</label>
+            {error.attack && <p>{error.attack}</p>}
+          </div>
+          <div className={styles.question}>
+            <input
+              className={styles.input_form}
+              onChange={handleInput}
+              type="number"
+              id="defense"
+              name="defense"
+              autoComplete="off"
+              value={dataForm.defense}
+            />
+            <label htmlFor="defense">Defense:</label>
+            {error.defense && <p>{error.defense}</p>}
+          </div>
+          <div className={styles.question}>
+            <input
+              className={styles.input_form}
+              onChange={handleInput}
+              type="number"
+              id="speed"
+              name="speed"
+              autoComplete="off"
+              value={dataForm.speed}
+            />
+            <label htmlFor="speed">Speed:</label>
+            {error.speed && <p>{error.speed}</p>}
+          </div>
+        </div>
+        <div className={styles.typesContainer}>
+          {types?.map((type) => {
+            return (
+              <div className={styles.checkboxContainer} key={type.id}>
+                <input
+                  className={`${styles.inputCheckbox} ${styles[type.name]}`}
+                  type="checkbox"
+                  name="types"
+                  value={type.name}
+                  onChange={(e) => handleCheckbox(e)}
+                />
+                <label>{type.name}</label>
+              </div>
+            );
+          })}
+        </div>
         {dataForm.types.length > 2 && <p>Choose only two types</p>}
-
-        <input type="submit" value="Create" disabled={disabled} />
+        <input
+          type="submit"
+          value="Create"
+          disabled={disabled}
+          className={`${styles.form_button} ${disabled || styles.is_valid}`}
+        />
       </form>
     </div>
   );

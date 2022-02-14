@@ -1,0 +1,244 @@
+.formContainer {
+  /* width: 100%; */
+ 
+	max-width: 100%;
+	padding: 10px 20px;
+	background: #f4f7f8;
+	margin: 10px auto;
+	padding: 5% 15% 10% 15%;
+	border-radius: 8px;
+
+}
+
+.transition,
+.creationForm .form_button,
+.creationForm .question label,
+.creationForm .question .input_form {
+  -moz-transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+  -o-transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+  -webkit-transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+  transition: all 0.25s cubic-bezier(0.53, 0.01, 0.35, 1.5);
+}
+
+.creationFormGrid {
+  display: grid;
+  padding: 1.5%;
+  grid-template-columns: 150px 150px;
+  grid-column-gap: 25%;
+  justify-content: space-evenly;
+}
+
+.creationForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  padding: 30px 25px;
+  background-color: white;
+  border-radius: 40px;
+  margin: 10px 0;
+  left: 50%;
+  -moz-transform: translate(-50%, 0);
+  -ms-transform: translate(-50%, 0);
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+.formContainer h2 {
+  color: #7aa7c7;
+  font-weight: 100;
+  letter-spacing: 0.01em;
+  margin-left: 15px;
+  text-transform: uppercase;
+  text-align: center;
+}
+.creationForm .form_button {
+  margin-top: 35px;
+  background-color: white;
+  border: 1px solid #7aa7c7;
+  line-height: 0;
+  font-size: 17px;
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 20px 15px;
+  border-radius: 60px;
+  color: #7aa7c7;
+  font-weight: 100;
+  letter-spacing: 0.01em;
+  position: relative;
+  z-index: 1;
+}
+.creationForm .form_button.is_valid:hover,
+form .form_button.is_valid:focus {
+  color: white;
+  background-color: #7aa7c7;
+}
+.creationForm .question {
+  position: relative;
+  padding: 10px 0;
+}
+.creationForm .question:first-of-type {
+  padding-top: 0;
+}
+.creationForm .question:last-of-type {
+  padding-bottom: 0;
+}
+.creationForm .question label {
+  transform-origin: left center;
+  color: #7aa7c7;
+  font-weight: 100;
+  letter-spacing: 0.01em;
+  font-size: 17px;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  display: block;
+  position: absolute;
+  margin-top: -40px;
+  z-index: 2;
+  pointer-events: none;
+}
+.creationForm .question .input_form {
+  appearance: none;
+  background-color: none;
+  border: 1px solid #7aa7c7;
+  line-height: 0;
+  font-size: 17px;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  padding: 10px 15px;
+  border-radius: 60px;
+  color: #7aa7c7;
+  font-weight: 100;
+  letter-spacing: 0.01em;
+  position: relative;
+  z-index: 1;
+}
+.creationForm .question .input_form:focus {
+  outline: none;
+  background: #7aa7c7;
+  color: white;
+  margin-top: 30px;
+}
+.creationForm .question .input_form:valid {
+  margin-top: 30px;
+}
+.creationForm .question .input_form:focus ~ label {
+  -moz-transform: translate(0, -35px);
+  -ms-transform: translate(0, -35px);
+  -webkit-transform: translate(0, -35px);
+  transform: translate(0, -35px);
+}
+.creationForm .question .input_form:valid ~ label {
+  text-transform: uppercase;
+  font-style: italic;
+  -moz-transform: translate(5px, -35px) scale(0.6);
+  -ms-transform: translate(5px, -35px) scale(0.6);
+  -webkit-transform: translate(5px, -35px) scale(0.6);
+  transform: translate(5px, -35px) scale(0.6);
+}
+
+
+
+/* Types css */
+.typesContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 80%;
+}
+
+.checkboxContainer {
+  position: relative;
+  width: 75px;
+  height: 30px;
+  margin: 5px;
+  border: 1px solid #e1ecf4;
+  box-sizing: border-box;
+}
+
+.checkboxContainer label {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 25px;
+  transition: 0.5s ease;
+}
+
+.checkboxContainer .inputCheckbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 80px;
+  height: 50px;
+  opacity: 0;
+  /* cursor: pointer; */
+}
+
+.Poison[type="checkbox"]:checked ~ label {
+  background-color: #b97fc9;
+}
+.Fighting[type="checkbox"]:checked ~ label {
+  background-color: #dc9c8f;
+}
+.Flying[type="checkbox"]:checked ~ label {
+  background-color: #6590c8;
+}
+.Ground[type="checkbox"]:checked ~ label {
+  background-color: #ecd495;
+}
+.Normal[type="checkbox"]:checked ~ label {
+  background-color: #a4acaf;
+}
+.Rock[type="checkbox"]:checked ~ label {
+  background-color: #bba96f;
+}
+.Bug[type="checkbox"]:checked ~ label {
+  background-color: #729f3f;
+}
+.Ghost[type="checkbox"]:checked ~ label {
+  background-color: #6d6895;
+  color: #ffff;
+}
+.Steel[type="checkbox"]:checked ~ label {
+  background-color: #b1a7ba;
+}
+.Fire[type="checkbox"]:checked ~ label {
+  background-color: #fd7d24;
+}
+.Water[type="checkbox"]:checked ~ label {
+  background-color: #4592c4;
+  color: #ffff;
+}
+.Grass[type="checkbox"]:checked ~ label {
+  background-color: #9bcc50;
+}
+.Electric[type="checkbox"]:checked ~ label {
+  background-color: #eed535;
+}
+.Psychic[type="checkbox"]:checked ~ label {
+  background-color: #f89dbb;
+}
+.Ice[type="checkbox"]:checked ~ label {
+  background-color: #90d9e5;
+}
+.Dragon[type="checkbox"]:checked ~ label {
+  background-color: #7365ab;
+  color: #ffff;
+}
+.Dark[type="checkbox"]:checked ~ label {
+  background-color: #4f4436;
+  color: #ffff;
+}
+.Fairy[type="checkbox"]:checked ~ label {
+  background-color: #fdb9e9;
+}
+.Unknown[type="checkbox"]:checked ~ label {
+  background-color: #699d8e;
+  color: #ffff;
+}
+.Shadow[type="checkbox"]:checked ~ label {
+  background-color: #000000;
+  color: #ffff;
+}
