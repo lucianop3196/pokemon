@@ -22,6 +22,6 @@ export default function validateForm(dataForm) {
 }
 
 const urlValidation = (URL) => {
-  const regex = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/);
+  const regex = new RegExp(/(https?:\/\/.*\.(?:png|jpg|gif))/);
   return regex.test(URL);
 };

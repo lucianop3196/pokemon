@@ -20,8 +20,8 @@ const PokemonDetail = ({ pokemonDetail }) => {
     <div className={styles.detailContainer}>
       <div className={styles.dataContainer}>
         <div className={styles.description}>
-          <p>id: {createInDb ? id.slice(0, 5) : id}</p>
-          <p>name: {name}</p>
+          <p className={styles.p_id}>#{createInDb ? id.slice(0, 5) : id}</p>
+          <h2>{name}</h2>
           <div className={stylePokemon.typesContainer}>
             {types?.map((type, i) => (
               <p className={stylePokemon[type.toLowerCase()]} key={i}>
@@ -30,8 +30,6 @@ const PokemonDetail = ({ pokemonDetail }) => {
             ))}
           </div>
         </div>
-
-        
 
         <div className={styles.statsChart}>
           <div className={styles.singleBar}>
@@ -48,7 +46,7 @@ const PokemonDetail = ({ pokemonDetail }) => {
             <div className={styles.bar}>
               <div
                 className={styles.value}
-                style={{ height: `${attack / 1.5}%` }}
+                style={{ height: `${attack / 2}%` }}
               >
                 {/* Obtengo el height %. La barra en total mide 200px */}
                 <span style={{ color: "white", display: "inline" }}>
@@ -87,14 +85,11 @@ const PokemonDetail = ({ pokemonDetail }) => {
           </div>
         </div>
 
-         <div className={styles.physical}>
+        <div className={styles.physical}>
           <p>height: {height}</p>
           <p>weight: {weight}</p>
         </div>
-
       </div>
-
-     
       <img src={urlImg} alt="Pokemon" />
     </div>
   );

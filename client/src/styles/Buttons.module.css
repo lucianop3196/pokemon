@@ -97,6 +97,9 @@
   box-shadow: none;
   color: #2c5777;
 }
+.btnMargin {
+  margin: 40px 0 0 90px;
+}
 
 /* Refresh Button */
 .homeBtn {

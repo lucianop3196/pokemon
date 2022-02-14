@@ -128,6 +128,7 @@
   border: solid 2px var(--normal-color);
   background-color: var(--normal-color);
   border-radius: 8px;
+  text-align: center;
 }
 
 .fighting {
@@ -135,6 +136,7 @@
   border: solid 2px var(--fighting-color);
   background-color: var(--fighting-color);
   border-radius: 8px;
+  text-align: center;
 }
 
 .flying {
@@ -151,6 +153,7 @@
   background-color: var(--poison-color);
   color: var(--absolute-white);
   border-radius: 8px;
+  text-align: center;
 }
 
 .ground {
@@ -158,6 +161,7 @@
   border: solid 2px var(--ground-color);
   background-color: var(--ground-color);
   border-radius: 8px;
+  text-align: center;
 }
 
 .rock {
@@ -165,6 +169,7 @@
   border: solid 2px var(--rock-color);
   background-color: var(--rock-color);
   border-radius: 8px;
+  text-align: center;
 }
 
 .bug {
@@ -172,6 +177,7 @@
   border: solid 2px var(--bug-color);
   background-color: var(--bug-color);
   border-radius: 8px;
+  text-align: center;
 }
 
 .ghost {
@@ -180,6 +186,7 @@
   background-color: var(--ghost-color);
   color: var(--absolute-white);
   border-radius: 8px;
+  text-align: center;
 }
 
 .steel {
@@ -187,6 +194,7 @@
   border: solid 2px var(--steel-color);
   background-color: var(--steel-color);
   border-radius: 8px;
+  text-align: center;
 }
 
 .fire {
@@ -210,6 +218,7 @@
   border: solid 2px var(--grass-color);
   background-color: var(--grass-color);
   border-radius: 8px;
+  text-align: center;
 }
 
 .electric {
@@ -217,6 +226,7 @@
   border: solid 2px var(--electric-color);
   background-color: var(--electric-color);
   border-radius: 8px;
+  text-align: center;
 }
 
 .psychic {
@@ -224,6 +234,7 @@
   border: solid 2px var(--psychic-color);
   background-color: var(--psychic-color);
   border-radius: 8px;
+  text-align: center;
 }
 
 .ice {
@@ -231,6 +242,7 @@
   border: solid 2px var(--ice-color);
   background-color: var(--ice-color);
   border-radius: 8px;
+  text-align: center;
 }
 
 .dragon {
@@ -239,6 +251,7 @@
   background-color: var(--dragon-color);
   color: var(--absolute-white);
   border-radius: 8px;
+  text-align: center;
 }
 
 .dark {
@@ -247,6 +260,7 @@
   background-color: var(--dark-color);
   color: var(--absolute-white);
   border-radius: 8px;
+  text-align: center;
 }
 
 .fairy {
@@ -254,6 +268,7 @@
   border: solid 2px var(--fairy-color);
   background-color: var(--fairy-color);
   border-radius: 8px;
+  text-align: center;
 }
 
 .unknown {
@@ -261,6 +276,7 @@
   border: solid 2px var(--unknown-color);
   background-color: var(--unknown-color);
   border-radius: 8px;
+  text-align: center;
 }
 
 .shadow {
@@ -269,4 +285,5 @@
   background-color: var(--shadow-color);
   color: var(--absolute-white);
   border-radius: 8px;
+  text-align: center;
 }
