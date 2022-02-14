@@ -4,6 +4,7 @@ import LandingPage from "./components/LandingPage";
 import Home from "./components/containers/Home";
 import DetailContainer from "./components/containers/DetailContainer";
 import Create from "./components/Create";
+import PageNotFound from "./components/presentationals/PageNotFound";
 
 function App() {
   return (
@@ -19,8 +20,7 @@ function App() {
           path="*"
           element={
             <main>
-              {/* Colocar componente (RouteNotFound) */}
-              <p>There's nothing here!</p>
+              <PageNotFound />
             </main>
           }
         />
