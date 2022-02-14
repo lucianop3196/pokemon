@@ -20,7 +20,6 @@ function Create() {
   });
   const [error, setError] = useState({}); //Estado local para validar el formulario
   const [disabled, setDisabled] = useState(true); //Habilitador del botón submit cuando no haya ningun error en el formulario
-  console.log(disabled)
   let navigate = useNavigate();
   const types = useSelector((state) => state.types);
   const dispatch = useDispatch();
@@ -239,7 +238,6 @@ function Create() {
           value="Create"
           disabled={disabled}
           className={`${styles.form_button} ${disabled || styles.is_valid}`}
-          
         />
       </form>
     </div>

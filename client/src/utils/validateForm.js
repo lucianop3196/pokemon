@@ -16,7 +16,6 @@ export default function validateForm(dataForm) {
   if (dataForm.weight < 0 || dataForm.weight > 200)
     errors.weight = "Invalid! Range between 0 - 200";
   if (!urlValidation(dataForm.urlImg) && dataForm.urlImg !== "") {
-    console.log(urlValidation(dataForm.urlImg));
     errors.urlImg = "Format not supported";
   }
   return errors;
