@@ -3,6 +3,7 @@
 import { useSelector } from "react-redux";
 import { pokemonContainer } from "../../styles/PokemonsContainer.module.css";
 import Pokemon from "../presentationals/Pokemon";
+import { pokemonsNotFound, p_pokemonNotFound } from "../../styles/PageNotFound.module.css";
 
 function PokemonsContainer({ lastItemIndex, firstItemIndex }) {
   //https://react-redux.js.org/api/hooks
@@ -10,19 +11,23 @@ function PokemonsContainer({ lastItemIndex, firstItemIndex }) {
 
   return (
     <>
-      <div className={pokemonContainer}>
-        {Array.isArray(pokemons) === false ? (
-          <>
-            <Pokemon key={pokemons.id} props={pokemons} />
-          </>
-        ) : (
-          pokemons?.slice(firstItemIndex, lastItemIndex).map((pokemon) => {
-            return (
-                <Pokemon props={pokemon} key={pokemon.id}/>
-            );
-          })
-        )}
-      </div>
+      {pokemons.length !== 0 ? (
+        <div className={pokemonContainer}>
+          {Array.isArray(pokemons) === false ? (
+            <>
+              <Pokemon key={pokemons.id} props={pokemons} />
+            </>
+          ) : (
+            pokemons?.slice(firstItemIndex, lastItemIndex).map((pokemon) => {
+              return <Pokemon props={pokemon} key={pokemon.id} />;
+            })
+          )}
+        </div>
+      ) : (<>
+      <p className={p_pokemonNotFound}>Pokemons not found</p>
+        <div className={pokemonsNotFound}/>
+         </>
+      )}
     </>
   );
 }

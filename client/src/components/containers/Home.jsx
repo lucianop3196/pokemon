@@ -111,10 +111,3 @@ function Home() {
 
 export default Home;
 
-// useEffect(() => {
-//     if (pokemons.length === 0) {
-//       return setSpinnerLoading(true);
-//     } else {
-//       return setSpinnerLoading(false);
-//     }
-//   }, [pokemons]);

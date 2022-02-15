@@ -1,8 +1,27 @@
-.container{
-    background-image: url("../assets/pageNotFound.jpeg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100vw;
-    height: 100vh;
+.container {
+  background-image: url("../assets/pageNotFound.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+}
+
+.pokemonsNotFound {
+  background-image: url("https://assets.pokemon.com/static2/_ui/img/og-default-image.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 40vw;
+  height: 40vh;
+}
+
+.p_pokemonNotFound {
+    margin: 10px 0 30px 0;
+    font-family: "Flexo-Demi", arial, sans-serif;
+    color: #313131;
+    font-size: 120%;
+    text-transform: none;
+    margin-bottom: 5px;
+    text-align: center;
 }
