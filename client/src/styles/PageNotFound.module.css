@@ -8,7 +8,7 @@
 }
 
 .pokemonsNotFound {
-  background-image: url("https://assets.pokemon.com/static2/_ui/img/og-default-image.jpeg");
+  background-image: url("../assets/pokemonNotFound.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
