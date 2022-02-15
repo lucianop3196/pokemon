@@ -18,6 +18,7 @@ import { homeContainer, spinnerStyle } from "../../styles/Home.module.css";
 
 function Home() {
   //Hooks para manejar el estado local y el renderizado de mi componente
+  //eslint-disable-next-line
   const [order, setOrder] = useState(""); // Hook para manejar el ordenamiento
   const [currentPage, setCurrentPage] = useState(1); // Hook para manejar el paginado
   const spinnerLoader = useSelector((state) => state.spinnerLoader);
