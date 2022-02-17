@@ -1,4 +1,4 @@
-// Función para normalizar la info que llega de types en las consultas a la db
+// Función para normalizar la info que llega de las consultas a la db
 normalizeDataDb = (pokemonDb) => {
   const typesNormalized = pokemonDb.dataValues.types?.map(
     (type) => type.name.charAt(0).toUpperCase() + type.name.slice(1)

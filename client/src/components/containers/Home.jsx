@@ -19,13 +19,13 @@ import { homeContainer, spinnerStyle } from "../../styles/Home.module.css";
 function Home() {
   //Hooks para manejar el estado local y el renderizado de mi componente
   //eslint-disable-next-line
-  const [order, setOrder] = useState(""); // Hook para manejar el ordenamiento
+  const [order, setOrder] = useState(""); // Hook para manejar el ordenamiento. Necesario para que se modifique el estado del componente y así re-renderice
   const [currentPage, setCurrentPage] = useState(1); // Hook para manejar el paginado
   const spinnerLoader = useSelector((state) => state.spinnerLoader);
 
   const pokemons = useSelector((state) => state.pokemons);
   const dispatch = useDispatch();
-  const quantityXPage = 12;
+  const quantityXPage = 12; //Cantidad pokemons por página
 
   //Llamado a la API para obtener types y pokemons
   useEffect(() => {
@@ -111,4 +111,3 @@ function Home() {
 }
 
 export default Home;
-
