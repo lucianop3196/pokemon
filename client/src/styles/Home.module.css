@@ -15,3 +15,11 @@
     margin: auto;
     text-align: center;
 }
+
+.refresh_span{
+  font-family: "Pokemon Solid", sans-serif;
+  text-decoration: none;
+  color: #39739d;
+  font-size: 20px;
+  letter-spacing: 1.5px;
+}

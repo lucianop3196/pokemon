@@ -14,7 +14,7 @@ import {
 } from "../../actions/index";
 import Pagination, { objIndexPagination } from "../Pagination";
 import spinner from "../../assets/spinner.gif";
-import { homeContainer, spinnerStyle } from "../../styles/Home.module.css";
+import { homeContainer, spinnerStyle, refresh_span } from "../../styles/Home.module.css";
 
 function Home() {
   //Hooks para manejar el estado local y el renderizado de mi componente
@@ -85,6 +85,7 @@ function Home() {
         />
       </div>
       <Refresh handleRefresh={handleRefresh} />
+      <span className={refresh_span}>Refresh!</span>
       <>
         {!spinnerLoader ? (
           <Pagination
