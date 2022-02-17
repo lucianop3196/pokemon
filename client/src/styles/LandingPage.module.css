@@ -1,25 +1,36 @@
-.background{
-    background-image: url("../assets/pokemonWallpaper.jpeg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100vw;
-    height: 100vh;
+.background {
+  background-image: url("../assets/pokemonWallpaper.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
 }
 
-.homeBtn{ 
-    background-image: url("../assets/homeButton.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 70px;
-    height: 70px;
-    position: absolute;
-    left: 250px;
-    top: 130px;
-    transition: transform .7s ease-in-out; /* Spin animation */
+.homeBtn {
+  background-image: url("../assets/homeButton.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  left: 250px;
+  top: 130px;
+  transition: transform 0.7s ease-in-out; /* Spin animation */
+}
+
+.home_span {
+  font-family: "Pokemon Solid", sans-serif;
+  position: absolute;
+  left: 250px;
+  top: 65px;
+  text-decoration: none;
+  color: #39739d;
+  font-size: 23px;
+  letter-spacing: 2px;
 }
 
 .homeBtn:hover {
-    transform: rotate(360deg) scale(1.5);
+  transform: rotate(360deg) scale(1.5);
 }
