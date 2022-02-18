@@ -11,12 +11,12 @@
 }
 
 .spinnerContainer {
-    width: 100%;
-    margin: auto;
-    text-align: center;
+  width: 100%;
+  margin: auto;
+  text-align: center;
 }
 
-.refresh_span{
+.refresh_span {
   font-family: "Pokemon Solid", sans-serif;
   text-decoration: none;
   color: #39739d;
