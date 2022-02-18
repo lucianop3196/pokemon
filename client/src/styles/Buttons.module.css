@@ -8,7 +8,7 @@
 
 .pagination {
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
 
 .pagination__item {
@@ -28,6 +28,10 @@
   /*  */
   font-size: 25px;
   color: #9098a9;
+  transition: all 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.prevNextPageBtn:hover {
+  transform: scale(1.1);
 }
 .pagination__link {
   /* Remove default style of button */
