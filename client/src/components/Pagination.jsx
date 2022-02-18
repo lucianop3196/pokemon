@@ -20,45 +20,47 @@ function Pagination({ items, quantityXPage, handlePagination, currentPage }) {
 
   return (
     <div className={wrapperPagination}>
-      <ul className={pagination}>
-        <li className={pagination__item}>
-          <button
-            className={prevNextPageBtn}
-            onClick={() => {
-              if (currentPage > 1) return handlePagination(currentPage - 1);
-            }}
-          >
-            {"<< "}
-          </button>
-        </li>
-        {pageNumbers?.map((pageNumber) => {
-          return (
-            <li className={pagination__item} key={pageNumber}>
-              <button
-                className={`${pagination__link} ${
-                  pageNumber === currentPage ? is_active : ""
-                }`}
-                onClick={() => {
-                  return handlePagination(pageNumber);
-                }}
-              >
-                {pageNumber}
-              </button>
-            </li>
-          );
-        })}
-        <li className={pagination__item}>
-          <button
-          className={prevNextPageBtn}
-            onClick={() => {
-              if (currentPage < pageNumbers.length)
-                return handlePagination(currentPage + 1);
-            }}
-          >
-            {">>"}
-          </button>
-        </li>
-      </ul>
+      {pageNumbers.length !== 0 && (
+        <ul className={pagination}>
+          <li className={pagination__item}>
+            <button
+              className={prevNextPageBtn}
+              onClick={() => {
+                if (currentPage > 1) return handlePagination(currentPage - 1);
+              }}
+            >
+              {"<< "}
+            </button>
+          </li>
+          {pageNumbers?.map((pageNumber) => {
+            return (
+              <li className={pagination__item} key={pageNumber}>
+                <button
+                  className={`${pagination__link} ${
+                    pageNumber === currentPage ? is_active : ""
+                  }`}
+                  onClick={() => {
+                    return handlePagination(pageNumber);
+                  }}
+                >
+                  {pageNumber}
+                </button>
+              </li>
+            );
+          })}
+          <li className={pagination__item}>
+            <button
+              className={prevNextPageBtn}
+              onClick={() => {
+                if (currentPage < pageNumbers.length)
+                  return handlePagination(currentPage + 1);
+              }}
+            >
+              {">>"}
+            </button>
+          </li>
+        </ul>
+      )}
     </div>
   );
 }
