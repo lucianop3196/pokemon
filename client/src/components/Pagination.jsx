@@ -5,6 +5,7 @@ import {
   pagination__item,
   pagination__link,
   is_active,
+  prevNextPageBtn,
 } from "../styles/Buttons.module.css";
 
 function Pagination({ items, quantityXPage, handlePagination, currentPage }) {
@@ -20,6 +21,16 @@ function Pagination({ items, quantityXPage, handlePagination, currentPage }) {
   return (
     <div className={wrapperPagination}>
       <ul className={pagination}>
+        <li className={pagination__item}>
+          <button
+            className={prevNextPageBtn}
+            onClick={() => {
+              if (currentPage > 1) return handlePagination(currentPage - 1);
+            }}
+          >
+            {"<< "}
+          </button>
+        </li>
         {pageNumbers?.map((pageNumber) => {
           return (
             <li className={pagination__item} key={pageNumber}>
@@ -36,6 +47,17 @@ function Pagination({ items, quantityXPage, handlePagination, currentPage }) {
             </li>
           );
         })}
+        <li className={pagination__item}>
+          <button
+          className={prevNextPageBtn}
+            onClick={() => {
+              if (currentPage < pageNumbers.length)
+                return handlePagination(currentPage + 1);
+            }}
+          >
+            {">>"}
+          </button>
+        </li>
       </ul>
     </div>
   );

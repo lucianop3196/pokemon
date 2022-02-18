@@ -6,9 +6,28 @@
   justify-content: center;
 }
 
+.pagination {
+  display: flex;
+  justify-content: center
+}
+
 .pagination__item {
   display: inline-block;
   margin: 0 10px;
+}
+.prevNextPageBtn {
+  /* Remove default style of button */
+
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  /*  */
+  font-size: 25px;
+  color: #9098a9;
 }
 .pagination__link {
   /* Remove default style of button */
