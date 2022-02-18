@@ -76,7 +76,6 @@ function Create() {
       types: [],
       urlImg: "",
     });
-    alert("Pokemon creado correctamente")
     setTimeout(() => {
       navigate(-1);
     }, 1000);
