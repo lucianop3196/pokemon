@@ -9,9 +9,12 @@ import style, {
 } from "../../styles/Pokemon.module.css";
 
 function Pokemon(props) {
-  const { name, types, urlImg, id, createInDb } = props.props;
+  const { name, types, urlImg, id, createInDb } = props.pokemons;
+  const handleDelete  = props.handleDelete;
+
   return (
     <div className={card}>
+      {createInDb && <button onClick={() => handleDelete(id)}>X</button>}
       <div className={cover}>
         <img src={urlImg} alt="Pokemons" />
         <div className={img__back}></div>

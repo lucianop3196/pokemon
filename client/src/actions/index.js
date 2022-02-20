@@ -15,6 +15,7 @@ export const actionTypes = {
   CLEAR_POKEMONS: "CLEAR_POKEMONS",
   LOADER_TRUE: "LOADER_TRUE",
   LOADER_FALSE: "LOADER_FALSE",
+  DELETE_POKEMON: "DELETE_POKEMON",
 };
 
 export function getTypes() {
@@ -88,7 +89,7 @@ export function searchPokemon(name) {
         return Swal.fire({
           icon: "error",
           title: "Oops...",
-          html: "Something went wrong! <br> Pokemon couldn't be searched",
+          html: "Something went wrong! <br> Pokemon not found",
         });
       });
   };
@@ -164,5 +165,27 @@ export function setLoaderTrue() {
 export function setLoaderFalse() {
   return {
     type: actionTypes.LOADER_FALSE,
+  };
+}
+
+export function deletePokemon(id) {
+  return function (dispatch) {
+    return axios
+      .delete(`http://localhost:3001/delete/${id}`)
+      .then((response) => {
+        Swal.fire({
+          icon: "success",
+          title: "Ok",
+          text: "Pokemon deleted correctly!",
+        });
+        return dispatch({ type: actionTypes.DELETE_POKEMON });
+      })
+      .catch((e) => {
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          html: "Something went wrong!<br> Please try again",
+        });
+      });
   };
 }

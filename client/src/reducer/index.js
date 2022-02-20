@@ -147,6 +147,12 @@ function rootReducer(state = initialState, action) {
       };
     }
 
+    case actionTypes.DELETE_POKEMON: {
+      return {
+        ...state,
+      };
+    }
+
     default:
       return { ...state };
   }

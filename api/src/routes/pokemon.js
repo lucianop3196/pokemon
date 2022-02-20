@@ -73,7 +73,7 @@ router.get("/pokemons", async (req, res) => {
     const totalPokemons = pokemonsApi.concat(dataDBNormalized);
     return res.json(totalPokemons);
   } catch (error) {
-    res.status(404).json({msg: "No se encontraron el/los pokemons. " + error});
+    res.status(404).json({ msg: "Pokemons not found. " + error });
   }
 });
 
@@ -84,7 +84,7 @@ router.get("/pokemon/:idPokemon", async (req, res) => {
   try {
     const pokemonDB = await Pokemon.findByPk(idPokemon, { include: Type });
     if (pokemonDB === null)
-      return res.status(404).json("Error, no encuentra el id: " + error);
+      return res.status(404).json("Error, id not found: " + error);
     return res.json(normalizeDataDb(pokemonDB));
   } catch {
     try {
@@ -141,6 +141,19 @@ router.post("/pokemons", async (req, res) => {
       });
       const newPokemonNormalized = normalizeDataDb(newPokemon);
       return res.json(newPokemonNormalized);
+    }
+  } catch (e) {
+    return res.status(404).json("Error ---> " + e);
+  }
+});
+
+router.delete("/delete/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const pokemon = await Pokemon.findByPk(id);
+    if (pokemon !== null) {
+      await pokemon.destroy();
+      res.json("Pokemon deleted correctly");
     }
   } catch (e) {
     return res.status(404).json("Error ---> " + e);
