@@ -150,3 +150,15 @@
 .homeBtn:hover {
   transform: rotate(1500deg) scale(1.3);
 }
+
+/* Close Btn */
+.deleteBtn {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  opacity: 0.3;
+  z-index: 100;
+}
+.deleteBtn:hover {
+  opacity: 1;
+}

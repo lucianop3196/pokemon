@@ -7,6 +7,7 @@ import style, {
   idPokemon,
   typesContainer,
 } from "../../styles/Pokemon.module.css";
+import {deleteBtn} from "../../styles/Buttons.module.css"
 
 function Pokemon(props) {
   const { name, types, urlImg, id, createInDb } = props.pokemons;
@@ -14,7 +15,7 @@ function Pokemon(props) {
 
   return (
     <div className={card}>
-      {createInDb && <button onClick={() => handleDelete(id)}>X</button>}
+      {createInDb && <button className={deleteBtn} onClick={() => handleDelete(id)}>X</button>}
       <div className={cover}>
         <img src={urlImg} alt="Pokemons" />
         <div className={img__back}></div>
