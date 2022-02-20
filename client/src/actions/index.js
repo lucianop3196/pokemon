@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export const actionTypes = {
   GET_POKEMONS: "GET_POKEMONS",
@@ -24,9 +25,11 @@ export function getTypes() {
       })
       .catch((e) => {
         console.log(e);
-        return alert(
-          "Ha ocurrido un error, por favor, ingrese al sitio web nuevamente"
-        );
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       });
   };
 }
@@ -42,7 +45,11 @@ export function getPokemons() {
       })
       .catch((e) => {
         console.log(e);
-        return alert("Ha ocurrido un error, intente ingresar nuevamente");
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+        });
       });
   };
 }
@@ -58,7 +65,11 @@ export function getPokemonById(id) {
       })
       .catch((e) => {
         console.log(e);
-        return alert("Hubo un error, intentelo nuevamente");
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong! Please try again",
+        });
       });
   };
 }
@@ -74,7 +85,11 @@ export function searchPokemon(name) {
       })
       .catch((e) => {
         console.log(e);
-        return alert("No se encontró el Pokemon");
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          html: "Something went wrong! <br> Pokemon couldn't be searched",
+        });
       });
   };
 }
@@ -100,14 +115,20 @@ export function saveNewPokemon(pokemon) {
     return axios
       .post("http://localhost:3001/pokemons", pokemon)
       .then((resp) => {
-        alert("Pokemon creado correctamente");
+        Swal.fire({
+          icon: "success",
+          title: "Ok",
+          text: "Pokemon created correctly!",
+        });
         return dispatch({ type: actionTypes.POST_POKEMON, payload: resp });
       })
       .catch((e) => {
         console.log(e);
-        return alert(
-          "El pokemon no se ha creado correctamente, por favor ingrese los datos nuevamente"
-        );
+        return Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          html: "Something went wrong!<br> Please try again with another name",
+        });
       });
   };
 }

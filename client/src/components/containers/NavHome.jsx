@@ -4,8 +4,8 @@ import Sort from "../buttons/Sort";
 import { useSelector } from "react-redux";
 import Filters from "../buttons/Filters";
 import CreateBtn from "../buttons/CreateBtn";
-import styles from "../../styles/NavHome.module.css"
-
+import styles from "../../styles/NavHome.module.css";
+import Swal from "sweetalert2";
 function NavHome({
   handleSortAlph,
   handleSortStrength,
@@ -53,6 +53,27 @@ function NavHome({
         </li>
         <li>
           <CreateBtn />
+        </li>
+        <li>
+          <button
+            className={styles.aboutBtn}
+            onClick={() =>
+              Swal.fire({
+                title: "<strong>Pokemon app</strong>",
+                icon: "info",
+                html:
+                  "<b>Technologies used:</b><br><br> { <b>frontEnd</b>: ['React', 'Redux'],<br>" +
+                  "<b>backEnd</b>: ['Node Js', 'Express'],<br>" +
+                  "<b>databases</b>: ['Sql', 'Postgres', 'Sequelize'] }",
+                showCloseButton: true,
+                focusConfirm: false,
+                confirmButtonText: '<i class="fa fa-thumbs-up"></i> Great!',
+                confirmButtonAriaLabel: "Thumbs up, great!",
+              })
+            }
+          >
+            <i className={`fa fa-question ${styles.question}`}></i>{" "}
+          </button>
         </li>
       </ul>
     </>

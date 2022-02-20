@@ -1,0 +1,25 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.footer .contactInfo {
+    display: flex;
+    margin-top: 15px;
+    align-items: center;
+}
+.footer a {
+  margin: 5px 10px;
+}
+.icons {
+  color: black;
+}
+.footer p {
+  font-family: "Pokemon Solid", sans-serif;
+  text-decoration: none;
+  color: #39739d;
+  font-size: 13px;
+  letter-spacing: 1.3px;
+}
+
