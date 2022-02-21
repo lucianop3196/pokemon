@@ -1,13 +1,14 @@
 .footer {
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+  align-self: flex-end;
 }
 .footer .contactInfo {
     display: flex;
-    margin-top: 15px;
+    margin: 0 4rem 0 12rem ;
     align-items: center;
+    
 }
 .footer a {
   margin: 5px 10px;
