@@ -2,170 +2,132 @@
     <img src='https://static.wixstatic.com/media/85087f_0d84cbeaeb824fca8f7ff18d7c9eaafd~mv2.png/v1/fill/w_160,h_30,al_c,q_85,usm_0.66_1.00_0.01/Logo_completo_Color_1PNG.webp' </img>
 </p>
 
-# Individual Project - Henry Pokemon
+# Individual Project - Pokemon app
 
 <p align="left">
   <img height="150" src="./pokemon.png" />
 </p>
 
-## Objetivos del Proyecto
+## Description
 
-- Construir una App utlizando React, Redux, Node y Sequelize.
-- Afirmar y conectar los conceptos aprendidos en la carrera.
-- Aprender mejores prácticas.
-- Aprender y practicar el workflow de GIT.
-- Usar y practicar testing.
+Single page application (SPA) to prove the use of differents technologies.
+In this app, pokemons are shown with some of their characteristics.
+The SPA consumes data from an extern API [PokeApi](https://pokeapi.co/) through a backend developed in NodeJs using Express, adding new features to the original api
 
-## Horarios y Fechas
+Moreover, pokemons could be created, with any specification wanted,  and stored in database.
 
-El proyecto tendrá una duración máxima de tres semanas. En el caso de que completan todas las tareas antes de dicho lapso podrán avisar a su Instructor para coordinar una fecha de presentación del trabajo (DEMO).
+Features: 
+- Search pokemon
+- Create a personalized pokemon
+- Filter pokemons by source (API or database)
+- Filter by type of pokemon
+- Sort pokemons by strength
+- Sort pokemons alphabetically
+- Show details of each pokemon
+- Refresh the pokemon's list 
+- Navigate through different pages
+- Delete pokemons from database
 
-## Comenzando
+## Technologies used and documentation
 
- 1. Forkear el repositorio para tener una copia del mismo en sus cuentas
- 2. Clonar el repositorio en sus computadoras para comenzar a trabajar
+- [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+- [React](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
+- [NodeJs](https://nodejs.org/dist/latest-v16.x/docs/api/)
+- [Express](https://expressjs.com/)
+- [Postgres](https://www.postgresql.org/docs/current/) - [Sequelize](https://sequelize.org/v6/)
 
-Tendrán un `boilerplate` con la estructura general tanto del servidor como de cliente.
+## Pre - requirements
 
-__IMPORTANTE:__ Es necesario contar minimamente con la última versión estable de Node y NPM. Asegurarse de contar con ella para poder instalar correctamente las dependecias necesarias para correr el proyecto.
+It is necessary to have at least the latest stable version of Node and NPM. Make sure you have it to be able to correctly install the necessary dependencies to run the project.
 
-Actualmente las versiónes necesarias son:
+Required versions are:
 
- * __Node__: 12.18.3 o mayor
- * __NPM__: 6.14.16 o mayor
+- **Node**: 12.18.3 or greater
+- **NPM**: 6.14.16 or greater
 
-Para verificar que versión tienen instalada:
+To check which version you have installed:
 
 > node -v
 >
 > npm -v
 
-## BoilerPlate
+## Instructions to start the development server
 
-El boilerplate cuenta con dos carpetas: `api` y `client`. En estas carpetas estará el código del back-end y el front-end respectivamente.
-
-En `api` crear un archivo llamado: `.env` que tenga la siguiente forma:
+1. Clone the repository
+2. Create a database in postgres called pokemon
+3. There are two folders: api and client. In these folders will be the back-end and front-end code respectively.
+4. Create a file in api called .env that has the following structure:
 
 ```
-DB_USER=usuariodepostgres
-DB_PASSWORD=passwordDePostgres
+DB_USER=postgresUser
+DB_PASSWORD=postgresPassword
 DB_HOST=localhost
 ```
 
-Reemplazar `usuariodepostgres` y `passwordDePostgres` con tus propias credenciales para conectarte a postgres. Este archivo va ser ignorado en la subida a github, ya que contiene información sensible (las credenciales).
+Replace userPostgres and postgresPassword with your own credentials to connect to postgres.
 
-Adicionalmente será necesario que creen desde psql una base de datos llamada `pokemon`
+5. Run the following commands on the /api and /client folders
 
-El contenido de `client` fue creado usando: Create React App.
+```
+npm install
 
-## Enunciado
+npm start
+```
 
-La idea general es crear una aplicación en la cual se puedan ver los distintos Pokemon utilizando la api externa [pokeapi](https://pokeapi.co/) y a partir de ella poder, entre otras cosas:
+6. Finally open http://localhost:3000
 
-  - Buscar pokemons
-  - Filtrarlos / Ordenarlos
-  - Crear nuevos pokemons
+## Dependencies installed:
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-__IMPORTANTE__: Para las funcionalidades de filtrado y ordenamiento NO pueden utilizar los endpoints de la API externa que ya devuelven los resultados filtrados u ordenados sino que deben realizarlo ustedes mismos. En particular alguno de los ordenamientos o filtrados debe si o si realizarse desde el frontend.
+### `Front-end dependencies`
 
-### Únicos Endpoints/Flags que pueden utilizar
+### `react-router-dom:`
+This library was installed to facilitate component's rendering. Installed version 6.2.1.
 
-  - GET https://pokeapi.co/api/v2/pokemon
-  - GET https://pokeapi.co/api/v2/pokemon/{id}
-  - GET https://pokeapi.co/api/v2/pokemon/{name}
-  - GET https://pokeapi.co/api/v2/type
+###  `redux:`
+Redux centralize the application's state and logic enables powerful capabilities like undo/redo, state persistence. Version 4.1.2
 
-### Requerimientos mínimos:
+### `react-redux:`
+Provides APIs that enable components to interact with the Redux store. Version 7.2.7
 
-A continuación se detallaran los requerimientos mínimos para la aprobación del proyecto individial. Aquellos que deseen agregar más funcionalidades podrán hacerlo. En cuanto al diseño visual no va a haber wireframes ni prototipos prefijados sino que tendrán libertad de hacerlo a su gusto pero tienen que aplicar los conocimientos de estilos vistos en el curso para que quede agradable a la vista.
+### `redux-thunk:`
+Thunk middleware allows writing functions with logic inside that can interact with a Redux store's dispatch and getState methods. Version 2.4.1
 
-__IMPORTANTE__: No se permitirá utilizar librerías externas para aplicar estilos a la aplicación. Tendrán que utilizar CSS con algunas de las opciones que vimos en dicha clase (CSS puro, CSS Modules o Styled Components)
+### `sweetalert2:`
+A responsive and customizable replacement for javascript's popup boxes. Version 11.4.0
 
-#### Tecnologías necesarias:
-- [ ] React
-- [ ] Redux
-- [ ] Express
-- [ ] Sequelize - Postgres
+### `Back-end dependencies`
 
-#### Frontend
+### `axios:`
+Promise based HTTP client for the browser and node.js. Version 0.25.0
 
-Se debe desarrollar una aplicación de React/Redux que contenga las siguientes pantallas/rutas.
+### `body-parser:`
+Node.js body parsing middleware.
+Parse incoming request bodies in a middleware before your handlers, available under the req.body property. Version 1.19.0
 
-__Pagina inicial__: deben armar una landing page con
-- [ ] Alguna imagen de fondo representativa al proyecto
-- [ ] Botón para ingresar al home (`Ruta principal`)
+### `cookie-parser:`
+Parse Cookie header and populate req.cookies with an object keyed by the cookie names. Version 1.4.5
 
-__Ruta principal__: debe contener
-- [ ] Input de búsqueda para encontrar pokemons por nombre (La búsqueda será exacta, es decir solo encontrará al pokemon si se coloca el nombre completo)
-- [ ] Área donde se verá el listado de pokemons. Al iniciar deberá cargar los primeros resultados obtenidos desde la ruta `GET /pokemons` y deberá mostrar su:
-  - Imagen
-  - Nombre
-  - Tipos (Electrico, Fuego, Agua, etc)
-- [ ] Botones/Opciones para filtrar por tipo de pokemon y por pokemon existente o creado por nosotros
-- [ ] Botones/Opciones para ordenar tanto ascendentemente como descendentemente los pokemons por orden alfabético y por fuerza
-- [ ] Paginado para ir buscando y mostrando los siguientes pokemons, 12 pokemons por pagina.
+### `cors:`
+Node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options. Version 2.8.5
 
-__IMPORTANTE__: Dentro de la Ruta Principal se deben mostrar tanto los pokemons traidos desde la API como así también las de la base de datos. Por otro lado, si revisan el endpoint que trae todos los pokemons verán que no muestra la información del pokemon sino una URL para hacer un subrequest y obtener los datos de allí. Tendrán que por cada pokemon que van a mostrar hacer otro request a esa URL para obtener su imagen y tipos. Debido a que esto puede hacer que la búsqueda sea muy lenta limitar el resultado total a 40 pokemons totales.
+### `dotenv:`
+Loads environment variables from a .env file into process.env. Storing configuration in the environment separate from code is based on [The Twelve-Factor App](https://12factor.net/config) methodology. Version 8.2.0
 
-__Ruta de detalle de Pokemon__: debe contener
-- [ ] Los campos mostrados en la ruta principal para cada pokemon (imagen, nombre y tipos)
-- [ ] Número de Pokemon (id)
-- [ ] Estadísticas (vida, fuerza, defensa, velocidad)
-- [ ] Altura y peso
+### `express:`
+Back-end web application framework for Node.js. It is designed for building web applications and APIs. Version 4.17.1
 
-__Ruta de creación__: debe contener
-- [ ] Un formulario __controlado con JavaScript__ con los campos mencionados en el detalle del Pokemon
-- [ ] Posibilidad de seleccionar/agregar más de un tipo de Pokemon
-- [ ] Botón/Opción para crear un nuevo Pokemon
+### `morgan:`
+HTTP request logger middleware for node.js. Version 1.10.0 
 
-> Es requisito que el formulario de creación esté validado con JavaScript y no sólo con validaciones HTML. Pueden agregar las validaciones que consideren. Por ejemplo: Que el nombre del Pokemon no pueda contener caracteres numéricos, que la altura no pueda ser superior a determinado valor, etc.
+### `pg:`
+Non-blocking PostgreSQL client for Node.js. Pure JavaScript and optional native libpq bindings. Version 8.5.1
 
-#### Base de datos
+### `Sequelize:`
+Promise-based Node.js ORM tool for Postgres. It features solid transaction support, relations, eager and lazy loading, read replication and more. Version 6.3.5
 
-El modelo de la base de datos deberá tener las siguientes entidades (Aquellas propiedades marcadas con asterísco deben ser obligatorias):
-
-- [ ] Pokemon con las siguientes propiedades:
-  - ID (Número de Pokemon) * : No puede ser un ID de un pokemon ya existente en la API pokeapi
-  - Nombre *
-  - Vida
-  - Fuerza
-  - Defensa
-  - Velocidad
-  - Altura
-  - Peso
-- [ ] Tipo con las siguientes propiedades:
-  - ID
-  - Nombre
-
-La relación entre ambas entidades debe ser de muchos a muchos ya que un pokemon puede pertenecer a más de un tipo y, a su vez, un tipo puede incluir a muchos pokemons.
-
-__IMPORTANTE__: Pensar como modelar los IDs de los pokemons en la base de datos. Existen distintas formas correctas de hacerlo pero tener en cuenta que cuando hagamos click en alguno, este puede provenir de la API o de la Base de Datos por lo que cuando muestre su detalle no debería haber ambigüedad en cual se debería mostrar. Por ejemplo si en la API el pokemon `Bulbasaur` tiene id = 1 y en nuestra base de datos creamos un nuevo pokemon `Henry` con id = 1, ver la forma de diferenciarlos cuando querramos acceder al detalle del mismo.
-
-#### Backend
-
-Se debe desarrollar un servidor en Node/Express con las siguientes rutas:
-
-__IMPORTANTE__: No está permitido utilizar los filtrados, ordenamientos y paginados brindados por la API externa, todas estas funcionalidades tienen que implementarlas ustedes.
-
-- [ ] __GET /pokemons__:
-  - Obtener un listado de los pokemons desde pokeapi.
-  - Debe devolver solo los datos necesarios para la ruta principal
-- [ ] __GET /pokemons/{idPokemon}__:
-  - Obtener el detalle de un pokemon en particular
-  - Debe traer solo los datos pedidos en la ruta de detalle de pokemon
-  - Tener en cuenta que tiene que funcionar tanto para un id de un pokemon existente en pokeapi o uno creado por ustedes
-- [ ] __GET /pokemons?name="..."__:
-  - Obtener el pokemon que coincida exactamente con el nombre pasado como query parameter (Puede ser de pokeapi o creado por nosotros)
-  - Si no existe ningún pokemon mostrar un mensaje adecuado
-- [ ] __POST /pokemons__:
-  - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de pokemons por body
-  - Crea un pokemon en la base de datos
-- [ ] __GET /types__:
-  - Obtener todos los tipos de pokemons posibles
-  - En una primera instancia deberán traerlos desde pokeapi y guardarlos en su propia base de datos y luego ya utilizarlos desde allí
-
-
-#### Testing
-- [ ] Al menos tener un componente del frontend con sus tests respectivos
-- [ ] Al menos tener una ruta del backend con sus tests respectivos
-- [ ] Al menos tener un modelo de la base de datos con sus tests respectivos
+## Deployment 
+The app has the backend and database deployed on Heroku and the frontend on Vercel.
