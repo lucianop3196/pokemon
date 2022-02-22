@@ -14,9 +14,10 @@ Single page application (SPA) to prove the use of differents technologies.
 In this app, pokemons are shown with some of their characteristics.
 The SPA consumes data from an extern API [PokeApi](https://pokeapi.co/) through a backend developed in NodeJs using Express, adding new features to the original api
 
-Moreover, pokemons could be created, with any specification wanted,  and stored in database.
+Moreover, pokemons could be created, with any specification wanted, and stored in database.
 
-Features: 
+Features:
+
 - Search pokemon
 - Create a personalized pokemon
 - Filter pokemons by source (API or database)
@@ -24,7 +25,7 @@ Features:
 - Sort pokemons by strength
 - Sort pokemons alphabetically
 - Show details of each pokemon
-- Refresh the pokemon's list 
+- Refresh the pokemon's list
 - Navigate through different pages
 - Delete pokemons from database
 
@@ -80,54 +81,80 @@ npm start
 6. Finally open http://localhost:3000
 
 ## Dependencies installed:
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### `Front-end dependencies`
 
 ### `react-router-dom:`
+
 This library was installed to facilitate component's rendering. Installed version 6.2.1.
 
-###  `redux:`
+### `redux:`
+
 Redux centralize the application's state and logic enables powerful capabilities like undo/redo, state persistence. Version 4.1.2
 
 ### `react-redux:`
+
 Provides APIs that enable components to interact with the Redux store. Version 7.2.7
 
 ### `redux-thunk:`
+
 Thunk middleware allows writing functions with logic inside that can interact with a Redux store's dispatch and getState methods. Version 2.4.1
 
 ### `sweetalert2:`
+
 A responsive and customizable replacement for javascript's popup boxes. Version 11.4.0
 
 ### `Back-end dependencies`
 
 ### `axios:`
+
 Promise based HTTP client for the browser and node.js. Version 0.25.0
 
 ### `body-parser:`
+
 Node.js body parsing middleware.
 Parse incoming request bodies in a middleware before your handlers, available under the req.body property. Version 1.19.0
 
 ### `cookie-parser:`
+
 Parse Cookie header and populate req.cookies with an object keyed by the cookie names. Version 1.4.5
 
 ### `cors:`
+
 Node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options. Version 2.8.5
 
 ### `dotenv:`
+
 Loads environment variables from a .env file into process.env. Storing configuration in the environment separate from code is based on [The Twelve-Factor App](https://12factor.net/config) methodology. Version 8.2.0
 
 ### `express:`
+
 Back-end web application framework for Node.js. It is designed for building web applications and APIs. Version 4.17.1
 
 ### `morgan:`
-HTTP request logger middleware for node.js. Version 1.10.0 
+
+HTTP request logger middleware for node.js. Version 1.10.0
 
 ### `pg:`
+
 Non-blocking PostgreSQL client for Node.js. Pure JavaScript and optional native libpq bindings. Version 8.5.1
 
 ### `Sequelize:`
+
 Promise-based Node.js ORM tool for Postgres. It features solid transaction support, relations, eager and lazy loading, read replication and more. Version 6.3.5
 
-## Deployment 
+## Deployment
+
 The app has the backend and database deployed on Heroku and the frontend on Vercel.
+
+[Link](https://pennacchioni-pi.vercel.app/) to visit the app
+
+<img src="./client/public/readmeImage.png"/>
+
+Thanks for your time! I hope you enjoy my project.
+
+### `Contact:`
+
+[Linkedin](https://www.linkedin.com/in/luciano-pennacchioni/), [github](https://github.com/lucianop3196)
