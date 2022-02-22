@@ -20,7 +20,7 @@ export const actionTypes = {
 
 export function getTypes() {
   return function (dispatch) {
-    return axios("http://localhost:3001/types")
+    return axios("/types")
       .then((resp) => {
         return dispatch({ type: actionTypes.GET_TYPES, payload: resp.data });
       })
@@ -37,7 +37,7 @@ export function getTypes() {
 
 export function getPokemons() {
   return function (dispatch) {
-    return axios("http://localhost:3001/pokemons")
+    return axios("/pokemons")
       .then((response) => {
         return dispatch({
           type: actionTypes.GET_POKEMONS,
@@ -57,7 +57,7 @@ export function getPokemons() {
 
 export function getPokemonById(id) {
   return function (dispatch) {
-    return axios(`http://localhost:3001/pokemon/${id}`)
+    return axios(`/pokemon/${id}`)
       .then((resp) => {
         return dispatch({
           type: actionTypes.GET_POKEMON_BY_ID,
@@ -77,7 +77,7 @@ export function getPokemonById(id) {
 
 export function searchPokemon(name) {
   return function (dispatch) {
-    return axios(`http://localhost:3001/pokemons?name=${name}`)
+    return axios(`/pokemons?name=${name}`)
       .then((response) => {
         return dispatch({
           type: actionTypes.SEARCH_POKEMON,
@@ -114,7 +114,7 @@ export function saveNewPokemon(pokemon) {
   return function (dispatch) {
     //Chequear de que forma llega pokemon. Como un objeto?
     return axios
-      .post("http://localhost:3001/pokemons", pokemon)
+      .post("/pokemons", pokemon)
       .then((resp) => {
         Swal.fire({
           icon: "success",
@@ -171,7 +171,7 @@ export function setLoaderFalse() {
 export function deletePokemon(id) {
   return function (dispatch) {
     return axios
-      .delete(`http://localhost:3001/delete/${id}`)
+      .delete(`/delete/${id}`)
       .then((response) => {
         Swal.fire({
           icon: "success",
