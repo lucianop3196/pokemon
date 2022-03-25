@@ -12,7 +12,7 @@
 
 Single page application (SPA) to prove the use of differents technologies.
 In this app, pokemons are shown with some of their characteristics.
-The SPA consumes data from an extern API [PokeApi](https://pokeapi.co/) through a backend developed in NodeJs using Express, adding new features to the original api
+The SPA consumes data from an external API [PokeApi](https://pokeapi.co/) through a backend developed in NodeJs using Express, adding new features to the original api
 
 Moreover, pokemons could be created, with any specification wanted, and stored in database.
 
